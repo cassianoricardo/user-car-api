@@ -1,6 +1,7 @@
-package br.com.pitang.user.car.api.model.dto.request;
+package br.com.pitang.user.car.api.model.dto;
 
 import br.com.pitang.user.car.api.model.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,7 +22,7 @@ public class UserDTO {
     private String email;
     private Date birtday;
     private String login;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonIgnore
     private String password;
     private String phone;
 
