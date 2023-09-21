@@ -1,14 +1,15 @@
 package br.com.pitang.user.car.api.controller;
 
 import br.com.pitang.user.car.api.model.dto.UserDTO;
-import br.com.pitang.user.car.api.model.dto.request.UserCreateRequest;
-import br.com.pitang.user.car.api.model.dto.request.UserUpdateRequest;
+import br.com.pitang.user.car.api.model.request.user.UserCreateRequest;
+import br.com.pitang.user.car.api.model.request.user.UserUpdateRequest;
 import br.com.pitang.user.car.api.service.user.UserCreateService;
 import br.com.pitang.user.car.api.service.user.UserDeleteService;
 import br.com.pitang.user.car.api.service.user.UserFindService;
 import br.com.pitang.user.car.api.service.user.UserUpdateService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,16 +22,17 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 
 
+
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 
-@Controller
 @RestController
+@Validated
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("users")
-public class UserController extends BaseController{
+public class UserController {
 
     @Autowired
     UserUpdateService userUpdateService;
@@ -51,7 +53,7 @@ public class UserController extends BaseController{
 
     @PostMapping
     @ResponseStatus(CREATED)
-    public void createUser(@RequestBody UserCreateRequest userCreateRequest){
+    public void createUser(@Valid @RequestBody UserCreateRequest userCreateRequest){
         userCreateService.create(userCreateRequest);
     }
 
@@ -67,7 +69,7 @@ public class UserController extends BaseController{
     }
 
     @PutMapping("/{id}")
-    public UserDTO updateUser(@PathVariable Long id, @RequestBody UserUpdateRequest userUpdateRequest){
+    public UserDTO updateUser(@PathVariable Long id, @Valid @RequestBody UserUpdateRequest userUpdateRequest){
         return userUpdateService.update(id, userUpdateRequest);
     }
 }

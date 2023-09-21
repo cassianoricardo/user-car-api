@@ -1,4 +1,4 @@
-package br.com.pitang.user.car.api.model.dto.request;
+package br.com.pitang.user.car.api.model.request.user;
 
 
 import br.com.pitang.user.car.api.service.user.UserCreateService;

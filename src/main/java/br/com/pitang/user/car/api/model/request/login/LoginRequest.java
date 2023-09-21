@@ -1,9 +1,9 @@
-package br.com.pitang.user.car.api.controller.request;
+package br.com.pitang.user.car.api.model.request.login;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Data;
 
-import javax.validation.constraints.NotBlank;
 @Data
 @Builder
 public class LoginRequest {

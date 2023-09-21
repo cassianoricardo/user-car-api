@@ -1,7 +1,7 @@
 package br.com.pitang.user.car.api.service.user;
 
 import br.com.pitang.user.car.api.exception.NotFoundException;
-import br.com.pitang.user.car.api.model.User;
+import br.com.pitang.user.car.api.model.entity.User;
 import br.com.pitang.user.car.api.model.dto.UserDTO;
 import br.com.pitang.user.car.api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

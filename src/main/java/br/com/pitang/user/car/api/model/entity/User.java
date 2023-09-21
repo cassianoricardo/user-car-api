@@ -1,17 +1,16 @@
-package br.com.pitang.user.car.api.model;
+package br.com.pitang.user.car.api.model.entity;
 
 import br.com.pitang.user.car.api.model.dto.UserDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.*;
 import java.sql.Date;
 import java.util.Collection;
-import java.util.List;
 
 @Entity
 @Builder
@@ -33,9 +32,6 @@ public class User implements UserDetails {
   private Date birtday;
 
   private String phone;
-  @OneToMany
-  @JoinColumn(name="user_id")
-  private List<Car> cars;
 
   @Column(unique = true)
   private String login;
@@ -101,15 +97,6 @@ public class User implements UserDetails {
     this.phone = phone;
   }
 
-  public List<Car> getCars() {
-    return cars;
-  }
-
-  public void setCars(List<Car> cars) {
-    this.cars = cars;
-  }
-
-
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return roles;
@@ -128,6 +115,9 @@ public class User implements UserDetails {
   @Override
   public String getUsername() {
     return login;
+  }
+  public void setUsername(String username) {
+    this.login = username;
   }
 
   @Override

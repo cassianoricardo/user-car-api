@@ -1,6 +1,6 @@
 package br.com.pitang.user.car.api.service.impl;
 
-import br.com.pitang.user.car.api.model.User;
+import br.com.pitang.user.car.api.model.entity.User;
 import br.com.pitang.user.car.api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;

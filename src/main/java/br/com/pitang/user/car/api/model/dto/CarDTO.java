@@ -1,6 +1,6 @@
 package br.com.pitang.user.car.api.model.dto;
 
-import br.com.pitang.user.car.api.model.Car;
+import br.com.pitang.user.car.api.model.entity.Car;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CarDTO {
 
-        private Long id;
 
         private int year;
 
@@ -22,7 +21,13 @@ public class CarDTO {
 
         private String color;
 
+        private Long userId;
+
         public Car parseToEntity(){
-                return Car.builder().id(this.id).model(this.model).color(this.color).licensePlate(this.licensePlate).build();
+                return Car.builder()
+                          .year(this.year)
+                          .model(this.model)
+                          .color(this.color)
+                          .licensePlate(this.licensePlate).build();
         }
 }

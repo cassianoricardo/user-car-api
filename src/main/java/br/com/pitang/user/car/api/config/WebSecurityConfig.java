@@ -1,48 +1,44 @@
 package br.com.pitang.user.car.api.config;
 
-import br.com.pitang.user.car.api.jwt.AuthEntryPointJwt;
-import br.com.pitang.user.car.api.jwt.AuthTokenFilter;
-import br.com.pitang.user.car.api.service.impl.UserDetailsServiceImpl;
+import br.com.pitang.user.car.api.filter.AuthTokenFilter;
+import br.com.pitang.user.car.api.jwt.AuthEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
 @Configuration
-@EnableGlobalMethodSecurity(
+/*@EnableGlobalMethodSecurity(
     // securedEnabled = true,
     jsr250Enabled = true
     //prePostEnabled = true
-)
+)*/
+@EnableWebSecurity
 public class WebSecurityConfig {
-  @Autowired
-  UserDetailsServiceImpl userDetailsService;
 
   @Autowired
-  private AuthEntryPointJwt unauthorizedHandler;
+  AuthTokenFilter authTokenFilter;
+
+  @Autowired
+  AuthEntryPoint authEntryPointJwt;
 
   @Bean
-  public AuthTokenFilter authenticationJwtTokenFilter() {
-    return new AuthTokenFilter();
-  }
-
-  @Bean
-  public DaoAuthenticationProvider authenticationProvider() {
-      DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-
-      authProvider.setUserDetailsService(userDetailsService);
-      authProvider.setPasswordEncoder(passwordEncoder());
-
-      return authProvider;
+  public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+    return  httpSecurity
+            .csrf(AbstractHttpConfigurer::disable)
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll())
+            .addFilterBefore(authTokenFilter, UsernamePasswordAuthenticationFilter.class)
+            .exceptionHandling( e-> e.authenticationEntryPoint(authEntryPointJwt))
+            .build();
   }
 
   @Bean
@@ -55,28 +51,4 @@ public class WebSecurityConfig {
     return new BCryptPasswordEncoder();
   }
 
-  @Bean
-  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http.cors().and().csrf().disable()
-        .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-        .authorizeRequests().antMatchers("/actuator/**").hasRole("ADMIN")
-        .antMatchers(AUTH_WHITE_LIST).permitAll()
-        //.authorizeRequests().anyRequest().permitAll()
-        .anyRequest().authenticated();
-
-    http.authenticationProvider(authenticationProvider());
-
-    http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-
-    return http.build();
-  }
-  private static final String[] AUTH_WHITE_LIST = {
-          "/v3/api-docs/**",
-          "/swagger-ui/**",
-          "/v2/api-docs/**",
-          "/swagger-resources/**",
-          "/auth/**",
-          "/users/**"
-  };
 }

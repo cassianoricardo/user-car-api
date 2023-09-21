@@ -2,7 +2,7 @@
 package br.com.pitang.user.car.api.repository;
 
 import br.com.pitang.user.car.api.enums.StatusTaskEnum;
-import br.com.pitang.user.car.api.model.User;
+import br.com.pitang.user.car.api.model.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

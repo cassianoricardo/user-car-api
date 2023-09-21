@@ -1,51 +1,92 @@
 package br.com.pitang.user.car.api.exception;
 
-import org.springframework.context.support.DefaultMessageSourceResolvable;
-import org.springframework.http.HttpStatus;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import javax.servlet.http.HttpServletRequest;
-import java.time.Instant;
-import java.util.Objects;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
 
+import static org.springframework.http.HttpStatus.*;
+
+@Slf4j
 @ControllerAdvice
 public class HandlerException {
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorMessage> handleValidationExceptions(
             MethodArgumentNotValidException ex) {
 
-        var messages = ex.getBindingResult().getFieldErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.toList());
+        List<String> messages = new ArrayList<>();
+
+        ex.getFieldErrors().forEach(err -> messages.add(err.getDefaultMessage()));
+
         var joinMessage = "";
 
-        if(Objects.nonNull(messages)){
-            joinMessage = String.join(",", messages);
+        if(!messages.isEmpty()){
+            joinMessage = String.join(", ", messages);
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST.value())
+        return ResponseEntity.status(BAD_REQUEST.value())
                              .body(ErrorMessage.builder()
-                                               .timeStamp(Instant.now())
-                                               .error("Server was not able to process the request, check the params.")
-                                               .message(joinMessage)
+                                     .errorCode(getRequestTrace())
+                                     .message(joinMessage)
                                                .build());
     }
 
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<ErrorMessage> handleNotFoundException(NotFoundException ex, HttpServletRequest request) {
+    public ResponseEntity<ErrorMessage> handleNotFoundException(NotFoundException ex) {
 
-        return ResponseEntity.status(HttpStatus.NOT_FOUND.value())
+        return ResponseEntity.status(NOT_FOUND.value())
                 .body(ErrorMessage.builder()
-                        .status(HttpStatus.NOT_FOUND.value())
-                        .timeStamp(Instant.now())
-                        .error("Not found")
+                        .errorCode(getRequestTrace())
                         .message(ex.getMessage())
-                        .path(request.getServletPath())
                         .build());
+    }
+    @ResponseStatus(UNAUTHORIZED)
+    @ExceptionHandler(UnauthorizedException.class)
+    public ResponseEntity<ErrorMessage> handleUnauthorizedException(UnauthorizedException ex) {
+
+        return ResponseEntity.status(UNAUTHORIZED.value())
+                .body(ErrorMessage.builder()
+                        .errorCode(getRequestTrace())
+                        .message(ex.getMessage())
+                        .build());
+    }
+
+    @ResponseStatus(FORBIDDEN)
+    @ExceptionHandler(ForbiddenException.class)
+    public ResponseEntity<ErrorMessage> handleForbiddenException(ForbiddenException ex) {
+
+        return ResponseEntity.status(FORBIDDEN.value())
+                .body(ErrorMessage.builder()
+                        .errorCode(getRequestTrace())
+                        .message(ex.getMessage())
+                        .build());
+    }
+
+    @ResponseStatus(BAD_REQUEST)
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<ErrorMessage> handleBadRequestException(BadRequestException ex) {
+
+        return ResponseEntity.status(BAD_REQUEST.value())
+                .body(ErrorMessage.builder()
+                        .errorCode(getRequestTrace())
+                        .message(ex.getMessage())
+                        .build());
+    }
+
+    private static String getRequestTrace() {
+        try {
+            return MDC.get("requestTraceId");
+        } catch (Exception ex) {
+            log.error("Error reading requestTraceId from context. Returning null.", ex);
+            return null;
+        }
     }
 }
