@@ -40,7 +40,6 @@ public class CarController {
     }
 
     @PostMapping
-
     @ResponseStatus(CREATED)
     public void createCar(@Valid @RequestBody CarCreateRequest carCreateRequest){
         carCreateService.create(carCreateRequest);

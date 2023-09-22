@@ -30,7 +30,6 @@ import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 @RestController
 @Validated
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("users")
 public class UserController {
 
