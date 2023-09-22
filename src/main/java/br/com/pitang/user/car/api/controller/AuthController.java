@@ -1,10 +1,10 @@
 package br.com.pitang.user.car.api.controller;
 
-import br.com.pitang.user.car.api.model.response.JwtResponse;
 import br.com.pitang.user.car.api.exception.ForbiddenException;
-import br.com.pitang.user.car.api.util.JwtUtils;
 import br.com.pitang.user.car.api.model.entity.User;
 import br.com.pitang.user.car.api.model.request.login.LoginRequest;
+import br.com.pitang.user.car.api.model.response.JwtResponse;
+import br.com.pitang.user.car.api.util.JwtUtils;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,12 +14,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("auth")
 public class AuthController {

@@ -56,10 +56,10 @@
 2023-09-20 10:06:11,617 TRACE org.hibernate.type.descriptor.sql.BasicExtractor [http-nio-8080-exec-2] extracted value ([name2_1_1_] : [VARCHAR]) - [ROLE_USER]
 2023-09-20 10:06:11,620 TRACE org.hibernate.type.descriptor.sql.BasicExtractor [http-nio-8080-exec-2] extracted value ([user_id1_3_0_] : [BIGINT]) - [1]
 2023-09-20 10:06:11,621 TRACE org.hibernate.type.descriptor.sql.BasicExtractor [http-nio-8080-exec-2] extracted value ([role_id2_3_0_] : [BIGINT]) - [1]
-2023-09-20 10:06:14,851 ERROR br.com.pitang.user.car.api.jwt.AuthEntryPointJwt [http-nio-8080-exec-2] Unauthorized error: Bad credentials
+2023-09-20 10:06:14,851 ERROR br.com.pitang.user.car.api.security.AuthEntryPoint [http-nio-8080-exec-2] Unauthorized error: Bad credentials
 2023-09-20 10:06:16,099 ERROR org.apache.juli.logging.DirectJDKLog [http-nio-8080-exec-2] Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
 br.com.pitang.user.car.api.exception.UnauthorizedException: invalid login or password
-	at br.com.pitang.user.car.api.jwt.AuthEntryPointJwt.commence(AuthEntryPointJwt.java:29)
+	at br.com.pitang.user.car.api.security.AuthEntryPoint.commence(AuthEntryPointJwt.java:29)
 	at org.springframework.security.web.access.ExceptionTranslationFilter.sendStartAuthentication(ExceptionTranslationFilter.java:215)
 	at org.springframework.security.web.access.ExceptionTranslationFilter.handleAuthenticationException(ExceptionTranslationFilter.java:181)
 	at org.springframework.security.web.access.ExceptionTranslationFilter.handleSpringSecurityException(ExceptionTranslationFilter.java:171)
@@ -149,10 +149,10 @@ br.com.pitang.user.car.api.exception.UnauthorizedException: invalid login or pas
 2023-09-20 10:08:26,098 TRACE org.hibernate.type.descriptor.sql.BasicExtractor [http-nio-8080-exec-1] extracted value ([name2_1_1_] : [VARCHAR]) - [ROLE_USER]
 2023-09-20 10:08:26,100 TRACE org.hibernate.type.descriptor.sql.BasicExtractor [http-nio-8080-exec-1] extracted value ([user_id1_3_0_] : [BIGINT]) - [1]
 2023-09-20 10:08:26,101 TRACE org.hibernate.type.descriptor.sql.BasicExtractor [http-nio-8080-exec-1] extracted value ([role_id2_3_0_] : [BIGINT]) - [1]
-2023-09-20 10:08:29,660 ERROR br.com.pitang.user.car.api.jwt.AuthEntryPointJwt [http-nio-8080-exec-1] Unauthorized error: Bad credentials
+2023-09-20 10:08:29,660 ERROR br.com.pitang.user.car.api.security.AuthEntryPoint [http-nio-8080-exec-1] Unauthorized error: Bad credentials
 2023-09-20 10:08:34,995 ERROR org.apache.juli.logging.DirectJDKLog [http-nio-8080-exec-1] Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
 br.com.pitang.user.car.api.exception.UnauthorizedException: invalid login or password
-	at br.com.pitang.user.car.api.jwt.AuthEntryPointJwt.commence(AuthEntryPointJwt.java:29)
+	at br.com.pitang.user.car.api.security.AuthEntryPoint.commence(AuthEntryPointJwt.java:29)
 	at org.springframework.security.web.access.ExceptionTranslationFilter.sendStartAuthentication(ExceptionTranslationFilter.java:215)
 	at org.springframework.security.web.access.ExceptionTranslationFilter.handleAuthenticationException(ExceptionTranslationFilter.java:181)
 	at org.springframework.security.web.access.ExceptionTranslationFilter.handleSpringSecurityException(ExceptionTranslationFilter.java:171)
@@ -283,7 +283,7 @@ br.com.pitang.user.car.api.exception.UnauthorizedException: invalid login or pas
 2023-09-20 10:11:18,868 TRACE org.hibernate.type.descriptor.sql.BasicExtractor [http-nio-8080-exec-1] extracted value ([name2_1_1_] : [VARCHAR]) - [ROLE_USER]
 2023-09-20 10:11:18,871 TRACE org.hibernate.type.descriptor.sql.BasicExtractor [http-nio-8080-exec-1] extracted value ([user_id1_3_0_] : [BIGINT]) - [1]
 2023-09-20 10:11:18,872 TRACE org.hibernate.type.descriptor.sql.BasicExtractor [http-nio-8080-exec-1] extracted value ([role_id2_3_0_] : [BIGINT]) - [1]
-2023-09-20 10:11:18,978 ERROR br.com.pitang.user.car.api.jwt.AuthEntryPointJwt [http-nio-8080-exec-1] Unauthorized error: Bad credentials
+2023-09-20 10:11:18,978 ERROR br.com.pitang.user.car.api.security.AuthEntryPoint [http-nio-8080-exec-1] Unauthorized error: Bad credentials
 2023-09-20 10:33:49,709 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
 2023-09-20 10:33:49,720 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
 2023-09-20 10:33:49,742 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
@@ -2413,7 +2413,7 @@ java.lang.NullPointerException: Cannot invoke "java.util.List.stream()" because 
 2023-09-20 12:48:29,819 TRACE org.hibernate.type.descriptor.sql.BasicBinder [http-nio-8080-exec-1] binding parameter [6] as [VARCHAR] - [$2a$10$LlB0YfyQnhGt0F7oULfqA.wKplxbnV/K7.sLa/niyw3MsxRaOaruW]
 2023-09-20 12:48:29,820 TRACE org.hibernate.type.descriptor.sql.BasicBinder [http-nio-8080-exec-1] binding parameter [7] as [VARCHAR] - [99999]
 2023-09-20 12:50:26,240 TRACE org.hibernate.type.descriptor.sql.BasicBinder [http-nio-8080-exec-3] binding parameter [1] as [VARCHAR] - [string]
-2023-09-20 12:50:26,340 ERROR br.com.pitang.user.car.api.jwt.AuthEntryPointJwt [http-nio-8080-exec-3] Unauthorized error: Bad credentials
+2023-09-20 12:50:26,340 ERROR br.com.pitang.user.car.api.security.AuthEntryPoint [http-nio-8080-exec-3] Unauthorized error: Bad credentials
 2023-09-20 12:51:02,877 TRACE org.hibernate.type.descriptor.sql.BasicBinder [http-nio-8080-exec-5] binding parameter [1] as [VARCHAR] - [cassiano.ricardo.da.silva@gmail.com]
 2023-09-20 12:51:02,880 TRACE org.hibernate.type.descriptor.sql.BasicExtractor [http-nio-8080-exec-5] extracted value ([id1_2_] : [BIGINT]) - [2]
 2023-09-20 12:51:02,886 TRACE org.hibernate.type.descriptor.sql.BasicExtractor [http-nio-8080-exec-5] extracted value ([birtday2_2_] : [DATE]) - [2023-09-19]
@@ -4620,7 +4620,7 @@ Caused by: org.hibernate.AnnotationException: Illegal attempt to map a non colle
 2023-09-20 17:08:54,786 INFO org.apache.juli.logging.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
 2023-09-20 17:08:54,786 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
 2023-09-20 17:08:54,788 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 2 ms
-2023-09-20 17:10:21,276 ERROR br.com.pitang.user.car.api.jwt.AuthEntryPointJwt [http-nio-8080-exec-4] Unauthorized error: Full authentication is required to access this resource
+2023-09-20 17:10:21,276 ERROR br.com.pitang.user.car.api.security.AuthEntryPoint [http-nio-8080-exec-4] Unauthorized error: Full authentication is required to access this resource
 2023-09-20 17:11:16,709 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
 2023-09-20 17:11:16,720 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
 2023-09-20 17:11:16,743 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
@@ -4662,9 +4662,9 @@ Caused by: org.hibernate.AnnotationException: Illegal attempt to map a non colle
 2023-09-20 17:11:38,830 INFO org.apache.juli.logging.DirectJDKLog [http-nio-8080-exec-2] Initializing Spring DispatcherServlet 'dispatcherServlet'
 2023-09-20 17:11:38,831 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-2] Initializing Servlet 'dispatcherServlet'
 2023-09-20 17:11:38,836 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-2] Completed initialization in 5 ms
-2023-09-20 17:11:46,832 ERROR br.com.pitang.user.car.api.jwt.AuthEntryPointJwt [http-nio-8080-exec-8] Unauthorized error: Full authentication is required to access this resource
+2023-09-20 17:11:46,832 ERROR br.com.pitang.user.car.api.security.AuthEntryPoint [http-nio-8080-exec-8] Unauthorized error: Full authentication is required to access this resource
 2023-09-20 17:17:15,117 WARN com.zaxxer.hikari.pool.HikariPool$HouseKeeper [HikariPool-1 housekeeper] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m47s374ms153µs).
-2023-09-20 17:17:15,120 ERROR br.com.pitang.user.car.api.jwt.AuthEntryPointJwt [http-nio-8080-exec-2] Unauthorized error: Full authentication is required to access this resource
+2023-09-20 17:17:15,120 ERROR br.com.pitang.user.car.api.security.AuthEntryPoint [http-nio-8080-exec-2] Unauthorized error: Full authentication is required to access this resource
 2023-09-20 17:17:15,204 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
 2023-09-20 17:17:15,211 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
 2023-09-20 17:17:15,231 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
@@ -4707,9 +4707,9 @@ Caused by: org.hibernate.AnnotationException: Illegal attempt to map a non colle
 2023-09-20 17:17:42,604 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
 2023-09-20 17:17:42,606 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 2 ms
 2023-09-20 17:18:17,074 WARN com.zaxxer.hikari.pool.HikariPool$HouseKeeper [HikariPool-1 housekeeper] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=51s255ms746µs400ns).
-2023-09-20 17:18:17,076 ERROR br.com.pitang.user.car.api.jwt.AuthEntryPointJwt [http-nio-8080-exec-1] Unauthorized error: Full authentication is required to access this resource
+2023-09-20 17:18:17,076 ERROR br.com.pitang.user.car.api.security.AuthEntryPoint [http-nio-8080-exec-1] Unauthorized error: Full authentication is required to access this resource
 2023-09-20 17:45:58,030 WARN com.zaxxer.hikari.pool.HikariPool$HouseKeeper [HikariPool-1 housekeeper] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=27m40s949ms637µs700ns).
-2023-09-20 17:45:58,135 ERROR br.com.pitang.user.car.api.jwt.AuthEntryPointJwt [http-nio-8080-exec-2] Unauthorized error: Full authentication is required to access this resource
+2023-09-20 17:45:58,135 ERROR br.com.pitang.user.car.api.security.AuthEntryPoint [http-nio-8080-exec-2] Unauthorized error: Full authentication is required to access this resource
 2023-09-20 17:45:58,700 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
 2023-09-20 17:45:58,751 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
 2023-09-20 17:45:58,833 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
@@ -4751,7 +4751,7 @@ Caused by: org.hibernate.AnnotationException: Illegal attempt to map a non colle
 2023-09-20 17:48:23,239 INFO org.apache.juli.logging.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
 2023-09-20 17:48:23,239 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
 2023-09-20 17:48:23,241 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 2 ms
-2023-09-20 17:48:29,969 ERROR br.com.pitang.user.car.api.jwt.AuthEntryPointJwt [http-nio-8080-exec-1] Unauthorized error: Full authentication is required to access this resource
+2023-09-20 17:48:29,969 ERROR br.com.pitang.user.car.api.security.AuthEntryPoint [http-nio-8080-exec-1] Unauthorized error: Full authentication is required to access this resource
 2023-09-20 17:49:17,416 WARN com.zaxxer.hikari.pool.HikariPool$HouseKeeper [HikariPool-1 housekeeper] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m4s836ms943µs200ns).
 2023-09-20 17:54:05,388 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
 2023-09-20 17:54:05,394 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
@@ -4794,8 +4794,8 @@ Caused by: org.hibernate.AnnotationException: Illegal attempt to map a non colle
 2023-09-20 17:56:42,956 INFO org.apache.juli.logging.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
 2023-09-20 17:56:42,956 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
 2023-09-20 17:56:42,959 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 3 ms
-2023-09-20 17:57:13,792 ERROR br.com.pitang.user.car.api.jwt.AuthEntryPointJwt [http-nio-8080-exec-1] Unauthorized error: Full authentication is required to access this resource
-2023-09-20 17:58:12,473 ERROR br.com.pitang.user.car.api.jwt.AuthEntryPointJwt [http-nio-8080-exec-2] Unauthorized error: Full authentication is required to access this resource
+2023-09-20 17:57:13,792 ERROR br.com.pitang.user.car.api.security.AuthEntryPoint [http-nio-8080-exec-1] Unauthorized error: Full authentication is required to access this resource
+2023-09-20 17:58:12,473 ERROR br.com.pitang.user.car.api.security.AuthEntryPoint [http-nio-8080-exec-2] Unauthorized error: Full authentication is required to access this resource
 2023-09-20 17:58:12,562 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
 2023-09-20 17:58:12,568 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
 2023-09-20 17:58:12,600 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
@@ -4837,10 +4837,10 @@ Caused by: org.hibernate.AnnotationException: Illegal attempt to map a non colle
 2023-09-20 18:00:01,967 INFO org.apache.juli.logging.DirectJDKLog [http-nio-8080-exec-2] Initializing Spring DispatcherServlet 'dispatcherServlet'
 2023-09-20 18:00:01,968 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-2] Initializing Servlet 'dispatcherServlet'
 2023-09-20 18:00:01,974 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-2] Completed initialization in 6 ms
-2023-09-20 18:00:09,925 ERROR br.com.pitang.user.car.api.jwt.JwtUtils [http-nio-8080-exec-2] token not sent
+2023-09-20 18:00:09,925 ERROR br.com.pitang.user.car.api.util.JwtUtils [http-nio-8080-exec-2] token not sent
 2023-09-20 18:00:11,834 ERROR br.com.pitang.user.car.api.filter.AuthTokenFilter [http-nio-8080-exec-2] Cannot set user authentication: {}
 br.com.pitang.user.car.api.exception.UnauthorizedException: Unauthorized
-	at br.com.pitang.user.car.api.jwt.JwtUtils.validateJwtToken(JwtUtils.java:45)
+	at br.com.pitang.user.car.api.util.JwtUtils.validateJwtToken(JwtUtils.java:45)
 	at br.com.pitang.user.car.api.filter.AuthTokenFilter.doFilterInternal(AuthTokenFilter.java:35)
 	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
 	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
@@ -4902,12 +4902,12 @@ br.com.pitang.user.car.api.exception.UnauthorizedException: Unauthorized
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:833)
 2023-09-20 18:01:02,562 WARN com.zaxxer.hikari.pool.HikariPool$HouseKeeper [HikariPool-1 housekeeper] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m10s60ms757µs500ns).
-2023-09-20 18:01:02,565 ERROR br.com.pitang.user.car.api.jwt.AuthEntryPointJwt [http-nio-8080-exec-2] Unauthorized error: Full authentication is required to access this resource
-2023-09-20 18:02:30,152 ERROR br.com.pitang.user.car.api.jwt.JwtUtils [http-nio-8080-exec-3] token not sent
+2023-09-20 18:01:02,565 ERROR br.com.pitang.user.car.api.security.AuthEntryPoint [http-nio-8080-exec-2] Unauthorized error: Full authentication is required to access this resource
+2023-09-20 18:02:30,152 ERROR br.com.pitang.user.car.api.util.JwtUtils [http-nio-8080-exec-3] token not sent
 2023-09-20 18:03:28,023 WARN com.zaxxer.hikari.pool.HikariPool$HouseKeeper [HikariPool-1 housekeeper] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=55s34ms641µs600ns).
 2023-09-20 18:03:28,027 ERROR br.com.pitang.user.car.api.filter.AuthTokenFilter [http-nio-8080-exec-3] Cannot set user authentication: {}
 br.com.pitang.user.car.api.exception.UnauthorizedException: Unauthorized
-	at br.com.pitang.user.car.api.jwt.JwtUtils.validateJwtToken(JwtUtils.java:45)
+	at br.com.pitang.user.car.api.util.JwtUtils.validateJwtToken(JwtUtils.java:45)
 	at br.com.pitang.user.car.api.filter.AuthTokenFilter.doFilterInternal(AuthTokenFilter.java:35)
 	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
 	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346)
@@ -4968,7 +4968,7 @@ br.com.pitang.user.car.api.exception.UnauthorizedException: Unauthorized
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:833)
-2023-09-20 18:03:28,034 ERROR br.com.pitang.user.car.api.jwt.AuthEntryPointJwt [http-nio-8080-exec-3] Unauthorized error: Full authentication is required to access this resource
+2023-09-20 18:03:28,034 ERROR br.com.pitang.user.car.api.security.AuthEntryPoint [http-nio-8080-exec-3] Unauthorized error: Full authentication is required to access this resource
 2023-09-20 18:03:28,107 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
 2023-09-20 18:03:28,111 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
 2023-09-20 18:03:28,125 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
@@ -5074,7 +5074,7 @@ br.com.pitang.user.car.api.exception.UnauthorizedException: Unauthorized
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:833)
-2023-09-20 18:06:48,503 ERROR br.com.pitang.user.car.api.jwt.AuthEntryPointJwt [http-nio-8080-exec-1] Unauthorized error: Full authentication is required to access this resource
+2023-09-20 18:06:48,503 ERROR br.com.pitang.user.car.api.security.AuthEntryPoint [http-nio-8080-exec-1] Unauthorized error: Full authentication is required to access this resource
 2023-09-20 18:06:48,622 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
 2023-09-20 18:06:48,627 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
 2023-09-20 18:06:48,644 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
@@ -5179,7 +5179,7 @@ br.com.pitang.user.car.api.exception.UnauthorizedException: Unauthorized
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:833)
-2023-09-20 18:08:16,455 ERROR br.com.pitang.user.car.api.jwt.AuthEntryPointJwt [http-nio-8080-exec-2] Unauthorized error: Full authentication is required to access this resource
+2023-09-20 18:08:16,455 ERROR br.com.pitang.user.car.api.security.AuthEntryPoint [http-nio-8080-exec-2] Unauthorized error: Full authentication is required to access this resource
 2023-09-20 18:09:48,350 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
 2023-09-20 18:09:48,354 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
 2023-09-20 18:09:48,371 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.

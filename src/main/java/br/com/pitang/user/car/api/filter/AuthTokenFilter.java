@@ -43,7 +43,8 @@ public class AuthTokenFilter extends OncePerRequestFilter {
             "/api-docs/**",
             "/swagger-resources/**",
             "/auth/**",
-            "/users/**");
+            "/users/**",
+            "/webjars/**");
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
@@ -74,7 +75,8 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
                 filterChain.doFilter(request, response);
             }else {
-                logger.error("token not send");
+                logger.error("token not send ");
+                logger.error("Url: "+ request.getRequestURL());
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
                 return;
             }

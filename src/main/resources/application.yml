@@ -46,8 +46,10 @@ logging:
 server:
   port: 8080
   servlet:
+    contextPath: "/api"
     session:
       timeout: 30m
+  contextPath: "/api"
 user:
   car:
     api:

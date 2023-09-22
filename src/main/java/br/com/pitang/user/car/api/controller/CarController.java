@@ -7,6 +7,7 @@ import br.com.pitang.user.car.api.service.car.CarCreateService;
 import br.com.pitang.user.car.api.service.car.CarDeleteService;
 import br.com.pitang.user.car.api.service.car.CarFindService;
 import br.com.pitang.user.car.api.service.car.CarUpdateService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -17,8 +18,10 @@ import java.util.List;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 
-@RestController
+
 @Validated
+@RestController
+@SecurityRequirement(name = "Bearer Authentication")
 @RequestMapping("cars")
 public class CarController {
 
