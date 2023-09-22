@@ -1,10 +1,9 @@
-package br.com.pitang.user.car.api.jwt;
+package br.com.pitang.user.car.api.util;
 
 import br.com.pitang.user.car.api.model.entity.User;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
-import com.auth0.jwt.exceptions.JWTVerificationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
@@ -43,17 +42,13 @@ public class JwtUtils {
         return LocalDateTime.now().plusMinutes(jwtExpirationMinutes).toInstant(ZoneOffset.of("-03:00"));
     }
 
-    public String validateJwtTokenAndReturnLogin(String authToken) {
-        try {
+    public String getLoginInTokenJWT(String authToken) {
+
             Algorithm algorithm = Algorithm.HMAC256(jwtSecret);
             return JWT.require(algorithm)
                     .withIssuer("auth-api")
                     .build()
                     .verify(authToken)
                     .getSubject();
-        } catch (JWTVerificationException exception) {
-            log.error(exception.getMessage());
-            return "";
-        }
-        }
+    }
 }

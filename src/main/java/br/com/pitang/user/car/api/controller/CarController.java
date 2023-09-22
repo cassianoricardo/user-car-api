@@ -19,7 +19,6 @@ import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 @RestController
 @Validated
-//@CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("cars")
 public class CarController {
 
@@ -41,6 +40,7 @@ public class CarController {
     }
 
     @PostMapping
+
     @ResponseStatus(CREATED)
     public void createCar(@Valid @RequestBody CarCreateRequest carCreateRequest){
         carCreateService.create(carCreateRequest);

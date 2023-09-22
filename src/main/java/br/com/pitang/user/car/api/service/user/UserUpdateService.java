@@ -7,6 +7,7 @@ import br.com.pitang.user.car.api.model.request.user.UserUpdateRequest;
 import br.com.pitang.user.car.api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 
@@ -18,6 +19,7 @@ public class UserUpdateService {
     @Autowired
     UserRepository userRepository;
 
+    @Transactional
     public UserDTO update(Long id, UserUpdateRequest userUpdateRequest){
 
         var user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("User id:"+ id +" Not Found"));

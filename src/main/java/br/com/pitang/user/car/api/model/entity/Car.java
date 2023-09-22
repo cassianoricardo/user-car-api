@@ -21,26 +21,30 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private int year;
 
     @Column(unique = true)
     private String licensePlate;
 
+    @Column(nullable = false)
     private String model;
 
+    @Column(nullable = false)
     private String color;
 
     @ManyToOne
-    @JoinColumn(foreignKey = @ForeignKey(name = "fk_user_id"),name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private User user;
 
 
     public CarDTO parseToDTO() {
         return CarDTO.builder()
-                .year(this.year)
-                .model(this.model)
-                .color(this.color)
-                .licensePlate(this.licensePlate)
-                .userId(user.getId()).build();
+                     .id(id)
+                     .year(year)
+                     .model(model)
+                     .color(color)
+                     .licensePlate(licensePlate)
+                     .build();
     }
 }

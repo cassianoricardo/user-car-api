@@ -1,7 +1,7 @@
 package br.com.pitang.user.car.api.config;
 
 import br.com.pitang.user.car.api.filter.AuthTokenFilter;
-import br.com.pitang.user.car.api.jwt.AuthEntryPoint;
+import br.com.pitang.user.car.api.security.AuthEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

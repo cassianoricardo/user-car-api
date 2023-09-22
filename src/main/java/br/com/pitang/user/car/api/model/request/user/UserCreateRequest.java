@@ -3,7 +3,9 @@ package br.com.pitang.user.car.api.model.request.user;
 
 import br.com.pitang.user.car.api.model.dto.CarDTO;
 import br.com.pitang.user.car.api.model.entity.User;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,7 +29,8 @@ public class UserCreateRequest {
     @NotBlank(message = "Missing email")
     @Pattern(regexp = EMAIL_PATTERN, message = "Invalid email")
     private String email;
-    @NotBlank(message = "Missing birtday")
+    @NotNull(message = "Missing birtday")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private Date birtday;
     @NotBlank(message = "Missing login")
     private String login;

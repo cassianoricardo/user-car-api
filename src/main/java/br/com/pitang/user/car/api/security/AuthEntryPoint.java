@@ -1,4 +1,4 @@
-package br.com.pitang.user.car.api.jwt;
+package br.com.pitang.user.car.api.security;
 
 import br.com.pitang.user.car.api.exception.ErrorMessage;
 import com.fasterxml.jackson.databind.ObjectMapper;

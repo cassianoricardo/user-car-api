@@ -1,8 +1,8 @@
 package br.com.pitang.user.car.api.controller;
 
-import br.com.pitang.user.car.api.controller.response.JwtResponse;
+import br.com.pitang.user.car.api.model.response.JwtResponse;
 import br.com.pitang.user.car.api.exception.ForbiddenException;
-import br.com.pitang.user.car.api.jwt.JwtUtils;
+import br.com.pitang.user.car.api.util.JwtUtils;
 import br.com.pitang.user.car.api.model.entity.User;
 import br.com.pitang.user.car.api.model.request.login.LoginRequest;
 import jakarta.validation.Valid;

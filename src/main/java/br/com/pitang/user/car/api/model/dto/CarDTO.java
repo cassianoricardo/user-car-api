@@ -13,6 +13,8 @@ import lombok.NoArgsConstructor;
 public class CarDTO {
 
 
+        private Long id;
+
         private int year;
 
         private String licensePlate;
@@ -20,8 +22,6 @@ public class CarDTO {
         private String model;
 
         private String color;
-
-        private Long userId;
 
         public Car parseToEntity(){
                 return Car.builder()

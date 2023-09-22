@@ -13,18 +13,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CarUpdateRequest {
 
-    private int year;
+    private Integer year;
     private String licensePlate;
     private String model;
     private String color;
-    private Long userId;
 
     public Car parseToEntity(){
         return Car.builder().year(year)
                                .color(color)
                                .model(model)
                                .licensePlate(licensePlate)
-                               //.userId(userId)
                                .build();
     }
 }

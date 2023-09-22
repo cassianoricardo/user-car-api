@@ -7,10 +7,11 @@ import lombok.Data;
 @Data
 @Builder
 public class LoginRequest {
-	@NotBlank
+
+	@NotBlank(message = "Missing login")
   	private String login;
 
-	@NotBlank
+	@NotBlank(message = "Missing password")
 	private String password;
 
 }

@@ -1,13 +1,15 @@
 package br.com.pitang.user.car.api.filter;
 
+import br.com.pitang.user.car.api.util.JwtUtils;
 import br.com.pitang.user.car.api.model.entity.User;
 import br.com.pitang.user.car.api.repository.UserRepository;
 import br.com.pitang.user.car.api.service.impl.UserDetailsServiceImpl;
-import br.com.pitang.user.car.api.jwt.JwtUtils;
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.util.List;
 
+@Slf4j
 @Component
 public class AuthTokenFilter extends OncePerRequestFilter {
     @Autowired
@@ -43,7 +46,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
             "/users/**");
 
     @Override
-    protected boolean shouldNotFilter(HttpServletRequest request){
+    protected boolean shouldNotFilter(HttpServletRequest request) {
 
         return AUTH_WHITE_LIST.stream().anyMatch(url -> new AntPathRequestMatcher(url).matches(request));
     }
@@ -54,27 +57,32 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
         String jwt = parseJwt(request);
 
+        try {
 
-        if (jwt != null) {
-            var login = jwtUtils.validateJwtTokenAndReturnLogin(jwt);
+            if (jwt != null) {
+                var login = jwtUtils.getLoginInTokenJWT(jwt);
 
-            User user = userDetailsService.loadUserByUsername(login);
-            var authentication =
-                    new UsernamePasswordAuthenticationToken(
-                            user,
-                            null,
-                            user.getAuthorities());
-            authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                User user = userDetailsService.loadUserByUsername(login);
+                var authentication =
+                        new UsernamePasswordAuthenticationToken(
+                                user,
+                                null,
+                                user.getAuthorities());
+                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            filterChain.doFilter(request, response);
-        }else{
-            logger.error("token not send");
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED,"Unauthorized");
+                filterChain.doFilter(request, response);
+            }else {
+                logger.error("token not send");
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
+                return;
+            }
+        } catch (TokenExpiredException e) {
+            log.error("JWT token is expired: {}", e.getMessage());
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized - invalid session");
+            return;
         }
-
-
     }
 
     private String parseJwt(HttpServletRequest request) {

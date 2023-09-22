@@ -1,4 +1,4 @@
-package br.com.pitang.user.car.api.controller.response;
+package br.com.pitang.user.car.api.model.response;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
