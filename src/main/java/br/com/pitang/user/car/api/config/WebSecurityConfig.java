@@ -16,19 +16,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 @Configuration
-/*@EnableGlobalMethodSecurity(
-    // securedEnabled = true,
-    jsr250Enabled = true
-    //prePostEnabled = true
-)*/
 @EnableWebSecurity
 public class WebSecurityConfig {
 
   @Autowired
   AuthTokenFilter authTokenFilter;
-
-  @Autowired
-  AuthEntryPoint authEntryPointJwt;
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
@@ -37,7 +29,7 @@ public class WebSecurityConfig {
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll())
             .addFilterBefore(authTokenFilter, UsernamePasswordAuthenticationFilter.class)
-            .exceptionHandling( e-> e.authenticationEntryPoint(authEntryPointJwt))
+            .exceptionHandling( e-> e.authenticationEntryPoint(new AuthEntryPoint()))
             .build();
   }
 

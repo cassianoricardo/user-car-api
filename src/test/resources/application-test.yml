@@ -1,0 +1,36 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+  output:
+    ansi:
+      enabled: ALWAYS
+  server:
+    port: 8080
+    servlet:
+      contextPath: "/api"
+    contextPath: "/api"
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/db_user_car
+    username: root
+    password: root
+
+  jpa:
+    open-in-view: true
+    generate-ddl: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        show_sql: true
+        format_sql: true
+        ddl-auto: update
+user:
+  car:
+    api:
+      jwtSecret: userCarApiSecretKey
+      jwtExpirationMinutes: 60

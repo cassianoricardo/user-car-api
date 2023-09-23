@@ -24,24 +24,27 @@ public class HandlerException {
 
         List<String> messages = new ArrayList<>();
 
-        ex.getFieldErrors().forEach(err -> messages.add(err.getDefaultMessage()));
+        ex.getAllErrors().forEach(err -> messages.add(err.getDefaultMessage()));
 
-        var joinMessage = "";
+        String joinMessage = "";
 
         if(!messages.isEmpty()){
             joinMessage = String.join(", ", messages);
         }
+
+        log.warn("{} - Validation: {}",joinMessage, getRequestTrace());
         return ResponseEntity.status(BAD_REQUEST.value())
                              .body(ErrorMessage.builder()
                                      .errorCode(getRequestTrace())
                                      .message(joinMessage)
                                                .build());
+
     }
 
     @ResponseStatus(NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ErrorMessage> handleNotFoundException(NotFoundException ex) {
-
+        log.error("{} - Log error: {}",ex.getMessage(), getRequestTrace());
         return ResponseEntity.status(NOT_FOUND.value())
                 .body(ErrorMessage.builder()
                         .errorCode(getRequestTrace())
@@ -51,7 +54,7 @@ public class HandlerException {
     @ResponseStatus(UNAUTHORIZED)
     @ExceptionHandler(UnauthorizedException.class)
     public ResponseEntity<ErrorMessage> handleUnauthorizedException(UnauthorizedException ex) {
-
+        log.error("{} - Log error: {}",ex.getMessage(), getRequestTrace());
         return ResponseEntity.status(UNAUTHORIZED.value())
                 .body(ErrorMessage.builder()
                         .errorCode(getRequestTrace())
@@ -62,7 +65,7 @@ public class HandlerException {
     @ResponseStatus(FORBIDDEN)
     @ExceptionHandler(ForbiddenException.class)
     public ResponseEntity<ErrorMessage> handleForbiddenException(ForbiddenException ex) {
-
+        log.error("{} - Log error: {}",ex.getMessage(), getRequestTrace());
         return ResponseEntity.status(FORBIDDEN.value())
                 .body(ErrorMessage.builder()
                         .errorCode(getRequestTrace())
@@ -73,7 +76,7 @@ public class HandlerException {
     @ResponseStatus(BAD_REQUEST)
     @ExceptionHandler(BadRequestException.class)
     public ResponseEntity<ErrorMessage> handleBadRequestException(BadRequestException ex) {
-
+        log.error("{} - Log error: {}",ex.getMessage(), getRequestTrace());
         return ResponseEntity.status(BAD_REQUEST.value())
                 .body(ErrorMessage.builder()
                         .errorCode(getRequestTrace())

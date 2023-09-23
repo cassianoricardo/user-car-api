@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CarCreateRequest {
 
-    @NotNull(message = "Missing Year")
+    @NotNull(message = "Missing year")
     private Integer year;
     @NotBlank(message = "Missing licensePlate")
     private String licensePlate;

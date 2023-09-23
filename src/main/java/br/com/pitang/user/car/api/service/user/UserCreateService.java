@@ -14,6 +14,8 @@ import java.sql.Date;
 import java.util.Calendar;
 import java.util.stream.Collectors;
 
+import static java.util.Objects.nonNull;
+
 @Service
 public class UserCreateService {
 
@@ -37,12 +39,6 @@ public class UserCreateService {
             throw new BadRequestException("Login already exists");
         });
 
-        userCreateRequest.getCars().stream().map(CarDTO::getLicensePlate)
-                                            .forEach(licensePlate -> carRepository.findByLicensePlate(licensePlate)
-                                                                                   .ifPresent(car -> {
-                                                                                       throw new BadRequestException("License Plate already exists");
-                                                                                   }));
-
         var user = userCreateRequest.parseToEntity();
         user.setPassword(passwordEncoder.encode(userCreateRequest.getPassword()));
 
@@ -51,9 +47,15 @@ public class UserCreateService {
 
         userRepository.save(user);
 
-        var cars = userCreateRequest.getCars().stream().map(CarDTO::parseToEntity).collect(Collectors.toList());
-        cars.forEach(car -> car.setUser(user));
+        if(nonNull(userCreateRequest.getCars())) {
+            userCreateRequest.getCars().forEach(carDTO -> carRepository.findByLicensePlate(carDTO.getLicensePlate())
+                    .ifPresent(car -> {
+                        throw new BadRequestException("License Plate already exists");
+                    }));
 
-        carRepository.saveAll(cars);
+            var cars = userCreateRequest.getCars().stream().map(CarDTO::parseToEntity).collect(Collectors.toList());
+            cars.forEach(car -> car.setUser(user));
+            carRepository.saveAll(cars);
+        }
     }
 }

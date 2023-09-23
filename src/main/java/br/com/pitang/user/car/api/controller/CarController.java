@@ -60,7 +60,7 @@ public class CarController {
     }
 
     @PutMapping("/{id}")
-    public CarDTO updateCar(@PathVariable Long id, @Valid @RequestBody CarUpdateRequest carUpdateRequest){
+    public CarDTO updateCar(@PathVariable Long id, @RequestBody CarUpdateRequest carUpdateRequest){
         return carUpdateService.update(id, carUpdateRequest);
     }
 }

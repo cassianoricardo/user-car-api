@@ -53,8 +53,8 @@ server:
 user:
   car:
     api:
-      jwtSecret: todoSecretKey
-      jwtExpirationMinutes: 5
+      jwtSecret: userCarApiSecretKey
+      jwtExpirationMinutes: 60
 
 
 info:

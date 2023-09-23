@@ -1,6 +1,7 @@
 package br.com.pitang.user.car.api.model.request.user;
 
 import br.com.pitang.user.car.api.annotation.atleastoneof.AtLeastOneOf;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,6 +28,7 @@ public class UserUpdateRequest {
     @Pattern(regexp = EMAIL_PATTERN, message = "Invalid email")
     private String email;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private Date birtday;
 
     private String login;
