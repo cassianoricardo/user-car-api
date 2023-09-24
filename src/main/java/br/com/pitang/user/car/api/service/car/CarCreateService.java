@@ -23,7 +23,7 @@ public class CarCreateService {
         var user = userLoggedService.getUserAuthenticated();
 
         carRepository.findByLicensePlate(carCreateRequest.getLicensePlate()).ifPresent(car -> {
-            throw new BadRequestException("Email already exists");
+            throw new BadRequestException("LicensePlate already exists");
         });
 
         var car = carCreateRequest.parseToEntity();

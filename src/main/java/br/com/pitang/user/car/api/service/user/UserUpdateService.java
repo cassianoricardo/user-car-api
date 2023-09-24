@@ -22,7 +22,7 @@ public class UserUpdateService {
     @Transactional
     public UserDTO update(Long id, UserUpdateRequest userUpdateRequest){
 
-        var user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("User id:"+ id +" Not Found"));
+        var user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("User id: "+ id +" not found"));
 
         if (Objects.nonNull(userUpdateRequest.getFistName()) && !userUpdateRequest.getFistName().equals(user.getFistName())){
             user.setFistName(userUpdateRequest.getFistName());
