@@ -7,6 +7,7 @@ import br.com.pitang.user.car.api.service.car.CarCreateService;
 import br.com.pitang.user.car.api.service.car.CarDeleteService;
 import br.com.pitang.user.car.api.service.car.CarFindService;
 import br.com.pitang.user.car.api.service.car.CarUpdateService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,28 +39,33 @@ public class CarController {
     private CarUpdateService carUpdateService;
 
     @GetMapping
+    @Operation(summary = "Returns all cars of the logged in user")
     public List<CarDTO> getAllCars(){
         return carFindService.findAll();
     }
 
     @PostMapping
     @ResponseStatus(CREATED)
+    @Operation(summary = "Create a new car to the logged in user")
     public void createCar(@Valid @RequestBody CarCreateRequest carCreateRequest){
         carCreateService.create(carCreateRequest);
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Returns information about a logged-in user's car")
     public CarDTO getCar(@PathVariable Long id){
         return carFindService.findById(id);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(NO_CONTENT)
+    @Operation(summary = "Delete a car from the logged in user")
     public void deleteCar(@PathVariable Long id){
         carDeleteService.delete(id);
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Returns logged in user information")
     public CarDTO updateCar(@PathVariable Long id, @RequestBody CarUpdateRequest carUpdateRequest){
         return carUpdateService.update(id, carUpdateRequest);
     }

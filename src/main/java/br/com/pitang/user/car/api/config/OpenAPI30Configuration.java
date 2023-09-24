@@ -18,15 +18,12 @@ import org.springframework.context.annotation.Configuration;
 @OpenAPIDefinition(
         info =@Info(
                 title = "User API",
-                version = "${api.version}",
                 contact = @Contact(
-                        name = "Baeldung", email = "user-apis@baeldung.com", url = "https://www.baeldung.com"
+                        name = "Cassiano", email = "cassiano_ricardo@hotmail.com"
                 ),
                 license = @License(
                         name = "Apache 2.0", url = "https://www.apache.org/licenses/LICENSE-2.0"
-                ),
-                termsOfService = "${tos.uri}",
-                description = "${api.description}"
+                )
         )
 )
 public class OpenAPI30Configuration {

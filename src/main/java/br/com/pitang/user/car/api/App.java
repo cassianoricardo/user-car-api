@@ -16,6 +16,8 @@ public class App {
 		var port = env.getProperty("server.port");
 
 		log.info("\n\n\t Swagger: http://localhost:{}/api/swagger-ui/index.html\n", port);
+
+		log.info("\n\n\t H2 Console: http://localhost:{}/api//h2-console\n", port);
 	}
 
 }

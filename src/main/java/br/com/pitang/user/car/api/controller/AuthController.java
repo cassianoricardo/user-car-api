@@ -5,6 +5,7 @@ import br.com.pitang.user.car.api.model.entity.User;
 import br.com.pitang.user.car.api.model.request.login.LoginRequest;
 import br.com.pitang.user.car.api.model.response.JwtResponse;
 import br.com.pitang.user.car.api.util.JwtUtils;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,7 @@ public class AuthController {
     JwtUtils jwtUtils;
 
     @PostMapping("signin")
+    @Operation(summary = "Authentic users")
     public JwtResponse authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         try {
             Authentication authentication = authenticationManager.authenticate(
