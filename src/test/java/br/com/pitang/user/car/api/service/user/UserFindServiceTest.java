@@ -47,7 +47,7 @@ class UserFindServiceTest extends MockitoTestBase {
     @Test
     @DisplayName("findById :: should to return user not found")
     void should_to_return_user_not_found() {
-        
+
         var userExpected = UserDTO.builder().id(1L).cars(emptyList()).build();
 
         when(userRepository.findById(1L)).thenReturn(Optional.empty());
