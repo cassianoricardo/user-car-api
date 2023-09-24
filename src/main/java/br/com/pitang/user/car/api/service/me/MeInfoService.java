@@ -15,11 +15,11 @@ import java.util.stream.Collectors;
 public class MeInfoService {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
     @Autowired
-    CarRepository carRepository;
+    private CarRepository carRepository;
     @Autowired
-    UserLoggedService userLoggedService;
+    private UserLoggedService userLoggedService;
 
     public MeResponse getInfo(){
         var userLogger = userLoggedService.getUserAuthenticated();

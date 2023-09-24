@@ -33,7 +33,7 @@ class CarDeleteServiceTest extends MockitoTestBase {
         var user = User.builder().id(1L).build();
         when(userLoggedService.getUserAuthenticated()).thenReturn(user);
 
-        assertDoesNotThrow(()->carDeleteService.delete(2L));
+        assertDoesNotThrow(() -> carDeleteService.delete(2L));
 
         verify(userLoggedService).getUserAuthenticated();
         verify(carRepository).deleteByIdAndUserId(2L, 1L);

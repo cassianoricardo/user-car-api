@@ -11,12 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
   @Autowired
-  UserRepository userRepository;
+  private UserRepository userRepository;
 
   @Override
   @Transactional
   public User loadUserByUsername(String login){
-    return userRepository.findByLogin(login).orElseThrow(() -> new UsernameNotFoundException("User Not Found with login: " + login));
+    return userRepository.findByLogin(login).orElseThrow(() -> new UsernameNotFoundException("User not found with login: " + login));
   }
 
 }

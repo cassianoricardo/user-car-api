@@ -3,6 +3,7 @@ package br.com.pitang.user.car.api.service.user;
 import br.com.pitang.user.car.api.MockitoTestBase;
 import br.com.pitang.user.car.api.exception.BadRequestException;
 import br.com.pitang.user.car.api.exception.NotFoundException;
+import br.com.pitang.user.car.api.model.dto.UserDTO;
 import br.com.pitang.user.car.api.model.entity.User;
 import br.com.pitang.user.car.api.model.request.user.UserUpdateRequest;
 import br.com.pitang.user.car.api.repository.UserRepository;
@@ -39,12 +40,15 @@ class UserUpdateServiceTest extends MockitoTestBase{
                              .email("zezin@gmail.com").birtday(Date.valueOf("1998-01-01"))
                              .fistName("zezin").lastName("roberto").phone("087").build();
 
+        var useDTOExpected = UserDTO.builder().login("ze").email("ze@gmail.com")
+                .birtday(Date.valueOf("1999-01-01")).fistName("ze").lastName("carlos").phone("081").build();
+
         when(userRepository.findById(2L)).thenReturn(Optional.of(user));
         when(userRepository.findByEmail(userUpdateRequest.getEmail())).thenReturn(Optional.empty());
         when(userRepository.findByLogin(userUpdateRequest.getLogin())).thenReturn(Optional.empty());
         when(userRepository.save(user)).thenReturn(user);
 
-        userUpdateService.update(2L, userUpdateRequest);
+        assertEquals(useDTOExpected, userUpdateService.update(2L, userUpdateRequest));
 
         verify(userRepository).findById(2L);
         verify(userRepository).findByEmail(userUpdateRequest.getEmail());

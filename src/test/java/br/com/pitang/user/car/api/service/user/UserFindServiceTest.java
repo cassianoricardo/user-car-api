@@ -13,6 +13,8 @@ import org.mockito.Mock;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static java.util.Collections.emptyList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -64,10 +66,13 @@ class UserFindServiceTest extends MockitoTestBase {
         var user1 = User.builder().id(1L).build();
         var user2 = User.builder().id(2L).build();
 
+        var usersDTOExpected = Stream.of(user1,user2).map(User::parseToDTO).collect(Collectors.toList());
+        usersDTOExpected.forEach(userDTO -> userDTO.setCars(emptyList()));
+
         when(userRepository.findAll()).thenReturn(List.of(user1,user2));
         when(carRepository.findByUserId(anyLong())).thenReturn(emptyList());
 
-        userFindService.findAll();
+        assertEquals(usersDTOExpected, userFindService.findAll());
 
         verify(userRepository).findAll();
         verify(carRepository, times(2)).findByUserId(anyLong());
