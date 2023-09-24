@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.flyway.FlywayMigrationInitializer;
 import org.springframework.boot.autoconfigure.flyway.FlywayProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
 
 @Configuration
 public class FlywayConfig {
@@ -20,7 +19,6 @@ public class FlywayConfig {
     }
 
     @Bean
-    @DependsOn("entityManagerFactory")
     Dummy delayedFlywayInitializer(Flyway flyway, FlywayProperties flywayProperties) {
         if (flywayProperties.isEnabled()) {
             flyway.migrate();
