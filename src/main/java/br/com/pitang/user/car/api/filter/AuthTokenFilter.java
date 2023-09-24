@@ -44,7 +44,8 @@ public class AuthTokenFilter extends OncePerRequestFilter {
             "/swagger-resources/**",
             "/auth/**",
             "/users/**",
-            "/webjars/**");
+            "/webjars/**",
+            "/h2-console/**");
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {

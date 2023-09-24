@@ -1,4 +1,10 @@
 spring:
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
   main:
     allow-bean-definition-overriding: true
 
@@ -15,20 +21,35 @@ spring:
     contextPath: "/api"
 
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/db_user_car
-    username: root
-    password: root
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:mydb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: userdb
+    password: userpass
 
   jpa:
-    open-in-view: true
-    generate-ddl: true
+    open-in-view: false
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
+        globally_quoted_identifiers: true
+        globally_quoted_identifiers_skip_column_definitions: false
+        dialect: org.hibernate.dialect.H2Dialect
         show_sql: true
         format_sql: true
         ddl-auto: update
+
+    defer-datasource-initialization: false
+    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+
+  flyway:
+    enable: true
+    baseline-on-migrate: false
+    user: userdb
+    password: userpass
+    url: jdbc:h2:mem:mydb
+    locations: classpath:db/migration
+    depends-on: entityManagerFactory
+    schemas: public
+
 user:
   car:
     api:

@@ -22,8 +22,9 @@ public class FlywayConfig {
     @Bean
     @DependsOn("entityManagerFactory")
     Dummy delayedFlywayInitializer(Flyway flyway, FlywayProperties flywayProperties) {
-        if (flywayProperties.isEnabled())
+        if (flywayProperties.isEnabled()) {
             flyway.migrate();
+        }
         return new Dummy();
     }
 }
