@@ -11,7 +11,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.mock.web.MockMultipartFile;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Date;
 import java.util.Optional;
 
@@ -125,6 +128,43 @@ class UserUpdateServiceTest extends MockitoTestBase{
         verify(userRepository).findById(2L);
         verify(userRepository).findByEmail(userUpdateRequest.getEmail());
         verify(userRepository).findByLogin(userUpdateRequest.getLogin());
+        verify(userRepository, never()).save(user);
+    }
+
+    @Test
+    @DisplayName("updatePhoto ::  should to update photo user")
+    void should_to_update_photo_user() throws IOException {
+
+        var inputStream = new FileInputStream(getClass().getResource("/photo-test.png").getFile());
+        var multiPartFile = new MockMultipartFile("Template", inputStream);
+
+        var user = User.builder().id(1L).build();
+        var userDTOExpcected = UserDTO.builder().id(1L).photo(multiPartFile.getBytes()).build();
+
+        when(userRepository.findById(1L)).thenReturn(Optional.of(user));
+        when(userRepository.save(user)).thenReturn(user);
+
+        assertEquals(userDTOExpcected, userUpdateService.updatePhoto(multiPartFile, 1L));
+
+        verify(userRepository).findById(1L);
+        verify(userRepository).save(user);
+    }
+
+    @Test
+    @DisplayName("updatePhoto ::  should to return user not found")
+    void should_to_return_user_not_found() throws IOException {
+
+        var inputStream = new FileInputStream(getClass().getResource("/photo-test.png").getFile());
+        var multiPartFile = new MockMultipartFile("Template", inputStream);
+
+        var user = User.builder().id(1L).build();
+
+        when(userRepository.findById(1L)).thenReturn(Optional.empty());
+
+        var exception = assertThrows(NotFoundException.class, ()-> userUpdateService.updatePhoto(multiPartFile, 1L));
+        assertEquals("User not found", exception.getMessage());
+
+        verify(userRepository).findById(1L);
         verify(userRepository, never()).save(user);
     }
 }

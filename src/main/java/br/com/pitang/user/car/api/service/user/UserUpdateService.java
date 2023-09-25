@@ -20,7 +20,7 @@ public class UserUpdateService {
 
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     public UserDTO update(Long id, UserUpdateRequest userUpdateRequest){
 

@@ -79,7 +79,7 @@ class UserControllerTest extends MockMvcBase {
                 .andExpect(jsonPath("$.[0].fistName").value("zé"))
                 .andExpect(jsonPath("$.[0].lastName").value("carlos"))
                 .andExpect(jsonPath("$.[0].login").value("ze"))
-                .andExpect(jsonPath("$.[0].birtday").value("08/10/1997"));
+                .andExpect(jsonPath("$.[0].birtday").value("07/10/1997"));
 
         verify(userFindService).findAll();
     }
@@ -117,7 +117,7 @@ class UserControllerTest extends MockMvcBase {
                 .andExpect(jsonPath("$.fistName").value("zé"))
                 .andExpect(jsonPath("$.lastName").value("carlos"))
                 .andExpect(jsonPath("$.login").value("ze"))
-                .andExpect(jsonPath("$.birtday").value("08/10/1997"));
+                .andExpect(jsonPath("$.birtday").value("07/10/1997"));
 
         verify(userFindService).findById(1L);
     }
@@ -163,7 +163,7 @@ class UserControllerTest extends MockMvcBase {
                 .andExpect(jsonPath("$.fistName").value("zé"))
                 .andExpect(jsonPath("$.lastName").value("carlos"))
                 .andExpect(jsonPath("$.login").value("ze"))
-                .andExpect(jsonPath("$.birtday").value("08/10/1997"));
+                .andExpect(jsonPath("$.birtday").value("07/10/1997"));
 
         verify(userUpdateService).update(eq(1L), any(UserUpdateRequest.class));
     }
@@ -247,7 +247,6 @@ class UserControllerTest extends MockMvcBase {
 
         verifyNoInteractions(userCreateService);
     }
-
     private static Stream<Arguments> providerMissingFieldsCreateUser() {
 
         var birtday = Calendar.getInstance();
@@ -327,6 +326,9 @@ class UserControllerTest extends MockMvcBase {
                 Arguments.of(missingPassword, "Missing password"));
     }
 
+    //endregion
+
+    //region uploadPhoto()
     @Test
     @DisplayName("PUT /users/{id}/photo")
     void uploadPhoto() throws Exception {

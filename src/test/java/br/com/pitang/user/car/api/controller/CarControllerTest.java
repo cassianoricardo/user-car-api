@@ -70,7 +70,7 @@ class CarControllerTest extends MockMvcBase {
         var carDTO1 = CarDTO.builder().id(1L).year(2020).color("black").model("tracker").licensePlate("aaa-1234").build();
         var carDTO2 = CarDTO.builder().id(2L).year(2020).color("white").model("tracker").licensePlate("aaa-1235").build();
 
-        when(carFindService.findAll()).thenReturn(List.of(carDTO1,carDTO2));
+        when(carFindService.findAll()).thenReturn(List.of(carDTO1, carDTO2));
 
         performGet("/cars")
                 .andExpect(status().isOk())
@@ -101,7 +101,7 @@ class CarControllerTest extends MockMvcBase {
 
         when(carUpdateService.update(eq(1L), any(CarUpdateRequest.class))).thenReturn(carDTO);
 
-        var carUpdateRequest  = CarUpdateRequest.builder().year(2020).color("black").model("tracker").licensePlate("aaa-1234").build();
+        var carUpdateRequest = CarUpdateRequest.builder().year(2020).color("black").model("tracker").licensePlate("aaa-1234").build();
 
         performPut("/cars/{id}", carUpdateRequest, 1L)
                 .andExpect(status().isOk())
@@ -121,7 +121,7 @@ class CarControllerTest extends MockMvcBase {
     @DisplayName("DELETE /cars/{id} - should to delete car by id")
     void should_to_delete_car_by_id() throws Exception {
 
-        performDelete("/cars/{id}",1L)
+        performDelete("/cars/{id}", 1L)
                 .andExpect(status().isNoContent());
 
         verify(carDeleteService).delete(1L);
@@ -143,7 +143,7 @@ class CarControllerTest extends MockMvcBase {
 
     }
 
-    @ParameterizedTest(name="{1}")
+    @ParameterizedTest(name = "{1}")
     @MethodSource("providerMissingFieldsCreateCar")
     @DisplayName("POST /cars - should to valid missing fields")
     void should_to_valid_missing_fields(CarCreateRequest carCreateRequest, String expectedMessage) throws Exception {
@@ -169,6 +169,9 @@ class CarControllerTest extends MockMvcBase {
                 Arguments.of(missingLicensePlate, "Missing licensePlate"));
     }
 
+    //endregion
+
+    //region uploadPhoto()
     @Test
     @DisplayName("PUT /cars/{id}/photo - should to updated photo of user")
     void should_to_updated_photo_of_user() throws Exception {
@@ -176,8 +179,8 @@ class CarControllerTest extends MockMvcBase {
         var inputStream = new FileInputStream(getClass().getResource("/photo-test.png").getFile());
         var multiPartFile = new MockMultipartFile("Template", inputStream);
 
-        performMultipart(HttpMethod.PUT,"/cars/{id}/photo", "photo", multiPartFile.getBytes(), 1L).andExpect(status().isOk());
-        verify(carUpdateService).updatePhoto( any(MultipartFile.class), eq(1L));
+        performMultipart(HttpMethod.PUT, "/cars/{id}/photo", "photo", multiPartFile.getBytes(), 1L).andExpect(status().isOk());
+        verify(carUpdateService).updatePhoto(any(MultipartFile.class), eq(1L));
     }
     //endregion
 }

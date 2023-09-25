@@ -13,7 +13,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.mock.web.MockMultipartFile;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -95,5 +98,49 @@ class CarUpdateServiceTest extends MockitoTestBase{
         verify(carRepository).findByIdAndUserId(1L, 2L);
         verify(carRepository,  never()).findByLicensePlateAndUserId(carUpdateRequest.getLicensePlate(), 2L);
         verify(carRepository, never()).save(any());
+    }
+
+    @Test
+    @DisplayName("updatePhoto ::  should to update photo car")
+    void should_to_update_photo_car() throws IOException {
+
+        var inputStream = new FileInputStream(getClass().getResource("/photo-test.png").getFile());
+        var multiPartFile = new MockMultipartFile("Template", inputStream);
+
+        var car = Car.builder().id(1L).build();
+        var carDTOExpected = CarDTO.builder().id(1L).photo(multiPartFile.getBytes()).build();
+
+        var user = User.builder().id(2L).build();
+
+        when(userLoggedService.getUserAuthenticated()).thenReturn(user);
+        when(carRepository.findByIdAndUserId(1L, user.getId())).thenReturn(Optional.of(car));
+        when(carRepository.save(car)).thenReturn(car);
+
+        assertEquals(carDTOExpected, carUpdateService.updatePhoto(multiPartFile, 1L));
+
+        verify(userLoggedService).getUserAuthenticated();
+        verify(carRepository).findByIdAndUserId(1L, user.getId());
+        verify(carRepository).save(car);
+    }
+
+    @Test
+    @DisplayName("updatePhoto ::  should to return car not found")
+    void should_to_return_car_not_found() throws IOException {
+
+        var inputStream = new FileInputStream(getClass().getResource("/photo-test.png").getFile());
+        var multiPartFile = new MockMultipartFile("Template", inputStream);
+
+        var car = Car.builder().id(1L).build();
+        var user = User.builder().id(2L).build();
+
+        when(userLoggedService.getUserAuthenticated()).thenReturn(user);
+        when(carRepository.findByIdAndUserId(1L, user.getId())).thenReturn(Optional.empty());
+
+        var exception = assertThrows(NotFoundException.class, ()-> carUpdateService.updatePhoto(multiPartFile, 1L));
+        assertEquals("Car not found", exception.getMessage());
+
+        verify(userLoggedService).getUserAuthenticated();
+        verify(carRepository).findByIdAndUserId(1L, user.getId());
+        verify(carRepository, never()).save(car);
     }
 }
