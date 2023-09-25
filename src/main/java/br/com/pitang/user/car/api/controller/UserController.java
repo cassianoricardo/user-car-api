@@ -12,11 +12,15 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
 
 @RestController
 @Validated
@@ -41,14 +45,14 @@ public class UserController {
         return userFindService.findAll();
     }
 
-    @PostMapping
+    @PostMapping( consumes = APPLICATION_JSON_VALUE)
     @ResponseStatus(CREATED)
     @Operation(summary = "Create a new user")
     public void createUser(@Valid @RequestBody UserCreateRequest userCreateRequest){
         userCreateService.create(userCreateRequest);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(path="/{id}", produces = APPLICATION_JSON_VALUE)
     @Operation(summary = "Return user")
     public UserDTO getUser(@PathVariable Long id){
         return userFindService.findById(id);
@@ -61,9 +65,15 @@ public class UserController {
         userDeleteService.deleteById(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(path= "/{id}",  consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     @Operation(summary = "Update user data")
     public UserDTO updateUser(@PathVariable Long id, @Valid @RequestBody UserUpdateRequest userUpdateRequest){
         return userUpdateService.update(id, userUpdateRequest);
+    }
+
+    @PutMapping(path= "/{id}/photo", consumes = {MULTIPART_FORM_DATA_VALUE})
+    @Operation(summary = "Returns logged in user information")
+    public void uploadPhoto(@PathVariable Long id, @RequestParam(name = "photo") MultipartFile photo) throws IOException {
+        userUpdateService.updatePhoto(photo, id);
     }
 }

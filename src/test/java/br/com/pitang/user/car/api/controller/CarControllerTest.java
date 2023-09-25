@@ -14,7 +14,11 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpMethod;
+import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileInputStream;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -163,6 +167,17 @@ class CarControllerTest extends MockMvcBase {
                 Arguments.of(missingColor, "Missing color"),
                 Arguments.of(missingModel, "Missing model"),
                 Arguments.of(missingLicensePlate, "Missing licensePlate"));
+    }
+
+    @Test
+    @DisplayName("PUT /cars/{id}/photo - should to updated photo of user")
+    void should_to_updated_photo_of_user() throws Exception {
+
+        var inputStream = new FileInputStream(getClass().getResource("/photo-test.png").getFile());
+        var multiPartFile = new MockMultipartFile("Template", inputStream);
+
+        performMultipart(HttpMethod.PUT,"/cars/{id}/photo", "photo", multiPartFile.getBytes(), 1L).andExpect(status().isOk());
+        verify(carUpdateService).updatePhoto( any(MultipartFile.class), eq(1L));
     }
     //endregion
 }

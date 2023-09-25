@@ -23,8 +23,11 @@ public class CarDTO {
 
         private String color;
 
+        private byte[] photo;
+
         public Car parseToEntity(){
                 return Car.builder()
+                          .photo(this.photo)
                           .year(this.year)
                           .model(this.model)
                           .color(this.color)

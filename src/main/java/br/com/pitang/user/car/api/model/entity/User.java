@@ -38,6 +38,9 @@ public class User implements UserDetails {
     @Column(unique = true)
     private String login;
 
+    @Lob
+    private byte[] photo;
+
     @JsonIgnore
     private String password;
 
@@ -69,6 +72,14 @@ public class User implements UserDetails {
 
     public void setFistName(String fistName) {
         this.fistName = fistName;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
     }
 
     public String getLastName() {
@@ -168,13 +179,15 @@ public class User implements UserDetails {
 //endregion
 
     public UserDTO parseToDTO() {
-        return UserDTO.builder().id(this.getId())
+        return UserDTO.builder()
+                 .id(this.getId())
                 .fistName(this.getFistName())
                 .lastName(this.getLastName())
                 .email(this.getEmail())
                 .login(this.getUsername())
                 .phone(this.getPhone())
                 .birtday(this.getBirtday())
+                .photo(this.getPhoto())
                 .build();
     }
 }

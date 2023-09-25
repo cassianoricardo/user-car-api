@@ -8,18 +8,20 @@ import br.com.pitang.user.car.api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Objects;
 
 
 @Service
+@Transactional
 public class UserUpdateService {
 
 
     @Autowired
     UserRepository userRepository;
 
-    @Transactional
     public UserDTO update(Long id, UserUpdateRequest userUpdateRequest){
 
         var user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("User id: "+ id +" not found"));
@@ -55,7 +57,13 @@ public class UserUpdateService {
 
             user.setUsername(userUpdateRequest.getLogin());
         }
+        return userRepository.save(user).parseToDTO();
+    }
 
+    public UserDTO updatePhoto(MultipartFile photo, Long userId) throws IOException {
+
+        var user = userRepository.findById(userId).orElseThrow(() -> new NotFoundException("User not found"));
+        user.setPhoto(photo.getBytes());
         return userRepository.save(user).parseToDTO();
     }
 }

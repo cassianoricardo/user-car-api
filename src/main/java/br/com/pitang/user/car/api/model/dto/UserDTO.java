@@ -30,6 +30,8 @@ public class UserDTO {
 
     private List<CarDTO> cars;
 
+    private byte[] photo;
+
     public User parseToEntity(){
         return User.builder().id(this.id)
                 .fistName(this.fistName)

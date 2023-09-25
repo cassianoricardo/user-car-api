@@ -23,9 +23,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 @Slf4j
 @RestController
-@RequestMapping("auth")
+@RequestMapping(path = "auth",  consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 public class AuthController {
     @Autowired
     AuthenticationManager authenticationManager;

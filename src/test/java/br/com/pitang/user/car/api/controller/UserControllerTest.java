@@ -14,7 +14,11 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpMethod;
+import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.*;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -75,7 +79,7 @@ class UserControllerTest extends MockMvcBase {
                 .andExpect(jsonPath("$.[0].fistName").value("zé"))
                 .andExpect(jsonPath("$.[0].lastName").value("carlos"))
                 .andExpect(jsonPath("$.[0].login").value("ze"))
-                .andExpect(jsonPath("$.[0].birtday").value("07/10/1997"));
+                .andExpect(jsonPath("$.[0].birtday").value("08/10/1997"));
 
         verify(userFindService).findAll();
     }
@@ -113,7 +117,7 @@ class UserControllerTest extends MockMvcBase {
                 .andExpect(jsonPath("$.fistName").value("zé"))
                 .andExpect(jsonPath("$.lastName").value("carlos"))
                 .andExpect(jsonPath("$.login").value("ze"))
-                .andExpect(jsonPath("$.birtday").value("07/10/1997"));
+                .andExpect(jsonPath("$.birtday").value("08/10/1997"));
 
         verify(userFindService).findById(1L);
     }
@@ -159,7 +163,7 @@ class UserControllerTest extends MockMvcBase {
                 .andExpect(jsonPath("$.fistName").value("zé"))
                 .andExpect(jsonPath("$.lastName").value("carlos"))
                 .andExpect(jsonPath("$.login").value("ze"))
-                .andExpect(jsonPath("$.birtday").value("07/10/1997"));
+                .andExpect(jsonPath("$.birtday").value("08/10/1997"));
 
         verify(userUpdateService).update(eq(1L), any(UserUpdateRequest.class));
     }
@@ -321,6 +325,17 @@ class UserControllerTest extends MockMvcBase {
                 Arguments.of(missingLastName, "Missing lastName"),
                 Arguments.of(missinglogin, "Missing login"),
                 Arguments.of(missingPassword, "Missing password"));
+    }
+
+    @Test
+    @DisplayName("PUT /users/{id}/photo")
+    void uploadPhoto() throws Exception {
+
+        var inputStream = new FileInputStream(getClass().getResource("/photo-test.png").getFile());
+        var multiPartFile = new MockMultipartFile("Template", inputStream);
+
+        performMultipart(HttpMethod.PUT,"/users/{id}/photo", "photo", multiPartFile.getBytes(), 1L).andExpect(status().isOk());
+        verify(userUpdateService).updatePhoto( any(MultipartFile.class), eq(1L));
     }
     //endregion
 

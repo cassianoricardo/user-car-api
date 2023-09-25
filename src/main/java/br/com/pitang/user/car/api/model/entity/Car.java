@@ -37,6 +37,9 @@ public class Car {
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private User user;
 
+    @Lob
+    @Column
+    private byte[] photo;
 
     public CarDTO parseToDTO() {
         return CarDTO.builder()
@@ -44,6 +47,7 @@ public class Car {
                      .year(year)
                      .model(model)
                      .color(color)
+                     .photo(photo)
                      .licensePlate(licensePlate)
                      .build();
     }
