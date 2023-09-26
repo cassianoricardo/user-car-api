@@ -8,12 +8,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface CarRepository extends JpaRepository<Car, Long> {
+public interface CarRepository extends JpaRepository<Car, Long>{
     Optional<Car> findByLicensePlate(String licensePlate);
 
     Optional<Car> findByLicensePlateAndUserId(String licensePlate, Long userId);
 
-    List<Car> findByUserId(Long userId);
+    List<Car> findByUserIdOrderByCountUsedDescModelAsc(Long userId);
 
     Optional<Car> findByIdAndUserId(Long id, Long userId);
 

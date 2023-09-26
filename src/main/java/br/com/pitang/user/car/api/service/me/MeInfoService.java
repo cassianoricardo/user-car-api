@@ -24,7 +24,7 @@ public class MeInfoService {
     public MeResponse getInfo(){
         var userLogger = userLoggedService.getUserAuthenticated();
         var user = userRepository.findByLogin(userLogger.getUsername()).orElseThrow(()-> new NotFoundException("user: "+ userLogger.getUsername() +" not found"));
-        var cars = carRepository.findByUserId(user.getId());
+        var cars = carRepository.findByUserIdOrderByCountUsedDescModelAsc(user.getId());
         var userDTO = user.parseToDTO();
         userDTO.setCars(cars.stream().map(Car::parseToDTO).collect(Collectors.toList()));
         return MeResponse.builder().user(userDTO).createdAt(user.getCreatedAt()).lastLogin(user.getLastLogin()).build();

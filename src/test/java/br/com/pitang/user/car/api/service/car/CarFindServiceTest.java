@@ -46,12 +46,12 @@ class CarFindServiceTest extends MockitoTestBase {
         var carsDTOExpected = List.of(car1Expected,car12xpected);
 
         when(userLoggedService.getUserAuthenticated()).thenReturn(user);
-        when(carRepository.findByUserId(user.getId())).thenReturn(List.of(car1, car2));
+        when(carRepository.findByUserIdOrderByCountUsedDescModelAsc(user.getId())).thenReturn(List.of(car1, car2));
 
         assertEquals(carsDTOExpected, carFindService.findAll());
 
         verify(userLoggedService).getUserAuthenticated();
-        verify(carRepository).findByUserId(user.getId());
+        verify(carRepository).findByUserIdOrderByCountUsedDescModelAsc(user.getId());
     }
 
     @Test
@@ -64,11 +64,13 @@ class CarFindServiceTest extends MockitoTestBase {
 
         when(userLoggedService.getUserAuthenticated()).thenReturn(user);
         when(carRepository.findByIdAndUserId(car.getId(), user.getId())).thenReturn(Optional.of(car));
+        when(carRepository.save(car)).thenReturn(car);
 
         assertEquals(carDTOExpected, carFindService.findById(car.getId()));
 
         verify(userLoggedService).getUserAuthenticated();
         verify(carRepository).findByIdAndUserId(car.getId(), user.getId());
+        verify(carRepository).save(car);
     }
 
     @Test

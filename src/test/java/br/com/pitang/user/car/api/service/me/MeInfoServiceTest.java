@@ -43,12 +43,12 @@ class MeInfoServiceTest extends MockitoTestBase {
 
         when(userLoggedService.getUserAuthenticated()).thenReturn(userLogged);
         when(userRepository.findByLogin(userLogged.getUsername())).thenReturn(Optional.of(userLogged));
-        when(carRepository.findByUserId(userLogged.getId())).thenReturn(List.of());
+        when(carRepository.findByUserIdOrderByCountUsedDescModelAsc(userLogged.getId())).thenReturn(List.of());
 
         assertEquals(userLoggedExpected, meInfoService.getInfo());
 
         verify(userLoggedService).getUserAuthenticated();
         verify(userRepository).findByLogin(userLogged.getUsername());
-        verify(carRepository).findByUserId(userLogged.getId());
+        verify(carRepository).findByUserIdOrderByCountUsedDescModelAsc(userLogged.getId());
     }
 }

@@ -41,6 +41,8 @@ public class Car {
     @Column
     private byte[] photo;
 
+    private int countUsed;
+
     public CarDTO parseToDTO() {
         return CarDTO.builder()
                      .id(id)
