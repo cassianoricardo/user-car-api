@@ -7,7 +7,7 @@
 ![Hibernate](https://img.shields.io/badge/Hibernate-59666C?style=for-the-badge&logo=Hibernate&logoColor=white)
 ![GIT](https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white)
 
-This project is an API built using **Java, Spring boot, Flyway Migrations, H2 as the database, and Spring Security and JWT for authentication control.**
+This project is an API built using **Java, Spring boot, Hibernate, Flyway Migrations, H2 as the database, and Spring Security and JWT for authentication control.**
 
 ## Table of Contents
 
