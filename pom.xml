@@ -18,13 +18,24 @@
         <java.version>11</java.version>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
+        <sonar.projectKey>br.com.pitang:user-car-api</sonar.projectKey>
+        <sonar.language>java</sonar.language>
         <sonar.sources>${project.basedir}\src\main\java</sonar.sources>
         <sonar.java.source>11</sonar.java.source>
         <sonar.java.binaries>${project.build.directory}\classes</sonar.java.binaries>
-        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}\target\site\jacoco\jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
-        <sonar.language>java</sonar.language>
-        <sonar.projectKey>br.com.pitang:user-car-api</sonar.projectKey>
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+        <sonar.test.exclusions>src/test/java/**/*</sonar.test.exclusions>
+        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}\target\site\jacoco\jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+        <sonar.coverage.exclusions>
+            **/config/**/*.*,
+            **/util/**/*.*,
+            **/filter/**/*.*,
+            **/enums/**/*.*,
+            **/exception/**/*.*,
+            **/model/**/*.*,
+            **/security/**/*.*,
+            **/App.java
+        </sonar.coverage.exclusions>
         <querydsl.version>5.0.0</querydsl.version>
     </properties>
 
