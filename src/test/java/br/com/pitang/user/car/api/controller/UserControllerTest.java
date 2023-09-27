@@ -18,10 +18,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.*;
+import java.io.FileInputStream;
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -52,17 +51,12 @@ class UserControllerTest extends MockMvcBase {
     @DisplayName("GET /users - should to return all users")
     void should_to_return_all_users() throws Exception {
 
-        var birtday = Calendar.getInstance();
-        birtday.set(Calendar.YEAR, 1997);
-        birtday.set(Calendar.MONTH, 9);
-        birtday.set(Calendar.DATE, 7);
-
         var userDTOList = List.of(UserDTO.builder().id(1L)
                 .email("ze@gmail.com")
                 .phone("081")
                 .fistName("zé")
                 .lastName("carlos")
-                .birtday(new Date(birtday.getTime().getTime()))
+                .birtday(Date.valueOf("1997-9-7"))
                 .login("ze")
                 .build());
         List<UserDTO> userDTOListExpected = new ArrayList<>();
@@ -79,7 +73,7 @@ class UserControllerTest extends MockMvcBase {
                 .andExpect(jsonPath("$.[0].fistName").value("zé"))
                 .andExpect(jsonPath("$.[0].lastName").value("carlos"))
                 .andExpect(jsonPath("$.[0].login").value("ze"))
-                .andExpect(jsonPath("$.[0].birtday").value("07/10/1997"));
+                .andExpect(jsonPath("$.[0].birtday").value("07/09/1997"));
 
         verify(userFindService).findAll();
     }
@@ -90,17 +84,13 @@ class UserControllerTest extends MockMvcBase {
     @DisplayName("GET /users/{id} - should return user by id")
     void should_to_return_user_by_id() throws Exception {
 
-        var birtday = Calendar.getInstance();
-        birtday.set(Calendar.YEAR, 1997);
-        birtday.set(Calendar.MONTH, 9);
-        birtday.set(Calendar.DATE, 7);
 
         var userDTO = UserDTO.builder().id(1L)
                 .email("ze@gmail.com")
                 .phone("081")
                 .fistName("zé")
                 .lastName("carlos")
-                .birtday(new Date(birtday.getTime().getTime()))
+                .birtday(Date.valueOf("1997-9-7"))
                 .login("ze")
                 .build();
 
@@ -117,7 +107,7 @@ class UserControllerTest extends MockMvcBase {
                 .andExpect(jsonPath("$.fistName").value("zé"))
                 .andExpect(jsonPath("$.lastName").value("carlos"))
                 .andExpect(jsonPath("$.login").value("ze"))
-                .andExpect(jsonPath("$.birtday").value("07/10/1997"));
+                .andExpect(jsonPath("$.birtday").value("07/09/1997"));
 
         verify(userFindService).findById(1L);
     }
@@ -137,17 +127,12 @@ class UserControllerTest extends MockMvcBase {
     @DisplayName("Put /users/{id} - should to update user by id")
     void should_to_update_user_by_id() throws Exception {
 
-        var birtday = Calendar.getInstance();
-        birtday.set(Calendar.YEAR, 1997);
-        birtday.set(Calendar.MONTH, 9);
-        birtday.set(Calendar.DATE, 7);
-
         var userUpdateRequest = UserUpdateRequest.builder()
                 .email("ze@gmail.com")
                 .phone("081")
                 .fistName("zé")
                 .lastName("carlos")
-                .birtday(new Date(birtday.getTime().getTime()))
+                .birtday(Date.valueOf("1997-9-7"))
                 .login("ze")
                 .build();
 
@@ -163,7 +148,7 @@ class UserControllerTest extends MockMvcBase {
                 .andExpect(jsonPath("$.fistName").value("zé"))
                 .andExpect(jsonPath("$.lastName").value("carlos"))
                 .andExpect(jsonPath("$.login").value("ze"))
-                .andExpect(jsonPath("$.birtday").value("07/10/1997"));
+                .andExpect(jsonPath("$.birtday").value("07/09/1997"));
 
         verify(userUpdateService).update(eq(1L), any(UserUpdateRequest.class));
     }
@@ -189,17 +174,12 @@ class UserControllerTest extends MockMvcBase {
     @DisplayName("Post /users - should to create new user")
     void should_to_create_new_user() throws Exception {
 
-        var birtday = Calendar.getInstance();
-        birtday.set(Calendar.YEAR, 1997);
-        birtday.set(Calendar.MONTH, 9);
-        birtday.set(Calendar.DATE, 7);
-
         var userCreateRequest = UserCreateRequest.builder()
                 .email("ze@gmail.com")
                 .phone("081")
                 .fistName("zé")
                 .lastName("carlos")
-                .birtday(new Date(birtday.getTime().getTime()))
+                .birtday(Date.valueOf("1997-9-7"))
                 .login("ze")
                 .password("123")
                 .build();
@@ -226,14 +206,10 @@ class UserControllerTest extends MockMvcBase {
     @DisplayName("Post /users - should to valid invalid email")
     void should_to_valid_invalid_email_method_post() throws Exception {
 
-        var birtday = Calendar.getInstance();
-        birtday.set(Calendar.YEAR, 1997);
-        birtday.set(Calendar.MONTH, 9);
-        birtday.set(Calendar.DATE, 7);
 
         var invalidEmail = UserCreateRequest.builder()
                 .email("ze@gmailcom")
-                .birtday(new Date(birtday.getTime().getTime()))
+                .birtday(Date.valueOf("1997-9-7"))
                 .phone("081")
                 .fistName("zé")
                 .lastName("carlos")
@@ -249,10 +225,6 @@ class UserControllerTest extends MockMvcBase {
     }
     private static Stream<Arguments> providerMissingFieldsCreateUser() {
 
-        var birtday = Calendar.getInstance();
-        birtday.set(Calendar.YEAR, 1997);
-        birtday.set(Calendar.MONTH, 9);
-        birtday.set(Calendar.DATE, 7);
 
         var missingBirtday = UserCreateRequest.builder()
                 .email("ze@gmail.com")
@@ -264,7 +236,7 @@ class UserControllerTest extends MockMvcBase {
                 .build();
 
         var missingEmail = UserCreateRequest.builder()
-                .birtday(new Date(birtday.getTime().getTime()))
+                .birtday(Date.valueOf("1997-9-7"))
                 .phone("081")
                 .fistName("zé")
                 .lastName("carlos")
@@ -274,7 +246,7 @@ class UserControllerTest extends MockMvcBase {
 
         var missingPhone = UserCreateRequest.builder()
                 .email("ze@gmail.com")
-                .birtday(new Date(birtday.getTime().getTime()))
+                .birtday(Date.valueOf("1997-9-7"))
                 .fistName("zé")
                 .lastName("carlos")
                 .login("ze")
@@ -283,7 +255,7 @@ class UserControllerTest extends MockMvcBase {
 
         var missingFistName = UserCreateRequest.builder()
                 .email("ze@gmail.com")
-                .birtday(new Date(birtday.getTime().getTime()))
+                .birtday(Date.valueOf("1997-9-7"))
                 .phone("081")
                 .lastName("carlos")
                 .login("ze")
@@ -292,7 +264,7 @@ class UserControllerTest extends MockMvcBase {
 
         var missingLastName = UserCreateRequest.builder()
                 .email("ze@gmail.com")
-                .birtday(new Date(birtday.getTime().getTime()))
+                .birtday(Date.valueOf("1997-9-7"))
                 .phone("081")
                 .fistName("zé")
                 .login("ze")
@@ -301,7 +273,7 @@ class UserControllerTest extends MockMvcBase {
 
         var missinglogin = UserCreateRequest.builder()
                 .email("ze@gmail.com")
-                .birtday(new Date(birtday.getTime().getTime()))
+                .birtday(Date.valueOf("1997-9-7"))
                 .phone("081")
                 .fistName("zé")
                 .lastName("carlos")
@@ -310,7 +282,7 @@ class UserControllerTest extends MockMvcBase {
 
         var missingPassword = UserCreateRequest.builder()
                 .email("ze@gmail.com")
-                .birtday(new Date(birtday.getTime().getTime()))
+                .birtday(Date.valueOf("1997-9-7"))
                 .phone("081")
                 .fistName("zé")
                 .lastName("carlos")

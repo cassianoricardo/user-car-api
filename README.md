@@ -49,3 +49,9 @@ The [H2](https://www.h2database.com/html/main.html) Console will be accessible a
 ```
 mvn spring-boot:run
 ```
+
+## Sonar Qube
+```
+mvn clean install
+mvn sonar:sonar -Dsonar.host.url=http://localhost:9000 -Dsonar.token={tokenSonar} -f pom.xml
+```
