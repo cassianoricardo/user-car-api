@@ -34,8 +34,8 @@ public class UserDTO {
 
     public User parseToEntity(){
         return User.builder().id(this.id)
-                .fistName(this.fistName)
-                .lastName(this.lastName)
+                .fistname(this.fistName)
+                .lastname(this.lastName)
                 .email(this.email)
                 .login(this.login)
                 .password(this.password)

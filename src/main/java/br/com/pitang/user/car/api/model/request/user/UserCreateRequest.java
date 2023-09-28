@@ -43,8 +43,8 @@ public class UserCreateRequest {
     public User parseToEntity(){
 
         return User.builder()
-                .fistName(this.fistName)
-                .lastName(this.lastName)
+                .fistname(this.fistName)
+                .lastname(this.lastName)
                 .email(this.email)
                 .login(this.login)
                 .password(this.password)

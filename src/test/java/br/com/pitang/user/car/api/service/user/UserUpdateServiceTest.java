@@ -41,7 +41,7 @@ class UserUpdateServiceTest extends MockitoTestBase{
 
         var user = User.builder().login("zezin").password("12")
                              .email("zezin@gmail.com").birtday(Date.valueOf("1998-01-01"))
-                             .fistName("zezin").lastName("roberto").phone("087").build();
+                             .fistname("zezin").lastname("roberto").phone("087").build();
 
         var useDTOExpected = UserDTO.builder().login("ze").email("ze@gmail.com")
                 .birtday(Date.valueOf("1999-01-01")).fistName("ze").lastName("carlos").phone("081").build();
@@ -69,7 +69,7 @@ class UserUpdateServiceTest extends MockitoTestBase{
 
         var user = User.builder().login("zezin").password("12")
                 .email("zezin@gmail.com").birtday(Date.valueOf("1998-01-01"))
-                .fistName("zezin").lastName("roberto").phone("087").build();
+                .fistname("zezin").lastname("roberto").phone("087").build();
 
         when(userRepository.findById(2L)).thenReturn(Optional.empty());
 
@@ -92,7 +92,7 @@ class UserUpdateServiceTest extends MockitoTestBase{
 
         var user = User.builder().login("zezin").password("12")
                 .email("zezin@gmail.com").birtday(Date.valueOf("1998-01-01"))
-                .fistName("zezin").lastName("roberto").phone("087").build();
+                .fistname("zezin").lastname("roberto").phone("087").build();
 
         when(userRepository.findById(2L)).thenReturn(Optional.of(user));
         when(userRepository.findByEmail(userUpdateRequest.getEmail())).thenReturn(Optional.of(user));
@@ -116,7 +116,7 @@ class UserUpdateServiceTest extends MockitoTestBase{
 
         var user = User.builder().login("zezin").password("12")
                 .email("zezin@gmail.com").birtday(Date.valueOf("1998-01-01"))
-                .fistName("zezin").lastName("roberto").phone("087").build();
+                .fistname("zezin").lastname("roberto").phone("087").build();
 
         when(userRepository.findById(2L)).thenReturn(Optional.of(user));
         when(userRepository.findByEmail(userUpdateRequest.getEmail())).thenReturn(Optional.empty());

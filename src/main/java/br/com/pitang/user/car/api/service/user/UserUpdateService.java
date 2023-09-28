@@ -26,11 +26,11 @@ public class UserUpdateService {
 
         var user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("User id: "+ id +" not found"));
 
-        if (Objects.nonNull(userUpdateRequest.getFistName()) && !userUpdateRequest.getFistName().equals(user.getFistName())){
-            user.setFistName(userUpdateRequest.getFistName());
+        if (Objects.nonNull(userUpdateRequest.getFistName()) && !userUpdateRequest.getFistName().equals(user.getFistname())){
+            user.setFistname(userUpdateRequest.getFistName());
         }
-        if (Objects.nonNull(userUpdateRequest.getLastName()) && !userUpdateRequest.getLastName().equals(user.getLastName())){
-            user.setLastName(userUpdateRequest.getLastName());
+        if (Objects.nonNull(userUpdateRequest.getLastName()) && !userUpdateRequest.getLastName().equals(user.getLastname())){
+            user.setLastname(userUpdateRequest.getLastName());
         }
         if (Objects.nonNull(userUpdateRequest.getEmail()) && !userUpdateRequest.getEmail().equals(user.getEmail())){
 
@@ -49,7 +49,7 @@ public class UserUpdateService {
         if (Objects.nonNull(userUpdateRequest.getPassword()) && !userUpdateRequest.getPassword().equals(user.getPassword())){
             user.setPassword(userUpdateRequest.getPassword());
         }
-        if (Objects.nonNull(userUpdateRequest.getLogin()) && !userUpdateRequest.getLogin().equals(user.getLastName())) {
+        if (Objects.nonNull(userUpdateRequest.getLogin()) && !userUpdateRequest.getLogin().equals(user.getLastname())) {
 
             userRepository.findByLogin(userUpdateRequest.getLogin()).ifPresent(login -> {
                 throw new BadRequestException("Login already exists");

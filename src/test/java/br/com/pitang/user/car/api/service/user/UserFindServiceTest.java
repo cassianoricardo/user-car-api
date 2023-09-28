@@ -8,6 +8,7 @@ import br.com.pitang.user.car.api.model.entity.Car;
 import br.com.pitang.user.car.api.model.entity.User;
 import br.com.pitang.user.car.api.repository.CarRepository;
 import br.com.pitang.user.car.api.repository.UserRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -18,7 +19,6 @@ import java.util.Optional;
 
 import static java.util.Collections.emptyList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 class UserFindServiceTest extends MockitoTestBase {
@@ -53,7 +53,7 @@ class UserFindServiceTest extends MockitoTestBase {
         var userExpected = UserDTO.builder().id(1L).cars(emptyList()).build();
 
         when(userRepository.findById(1L)).thenReturn(Optional.empty());
-        var exception = assertThrows(NotFoundException.class, () -> assertEquals(userExpected, userFindService.findById(1L)));
+        var exception = Assertions.assertThrows(NotFoundException.class, () -> assertEquals(userExpected, userFindService.findById(1L)));
         assertEquals("User Not Found", exception.getMessage());
         verify(userRepository).findById(1L);
         verify(carRepository, never()).findByUserIdOrderByCountUsedDescModelAsc(1L);
@@ -63,10 +63,10 @@ class UserFindServiceTest extends MockitoTestBase {
     @DisplayName("findAll :: should to return all users")
     void should_to_return_all_users() {
 
-        var user1 = User.builder().id(1L).fistName("user").lastName("a").build();
-        var user2 = User.builder().id(2L).fistName("user").lastName("b").build();
-        var user3 = User.builder().id(3L).fistName("user").lastName("c").build();
-        var user4 = User.builder().id(4L).fistName("user").lastName("d").build();
+        var user1 = User.builder().id(1L).fistname("user").lastname("a").build();
+        var user2 = User.builder().id(2L).fistname("user").lastname("b").build();
+        var user3 = User.builder().id(3L).fistname("user").lastname("c").build();
+        var user4 = User.builder().id(4L).fistname("user").lastname("d").build();
 
         var car1 = Car.builder().id(1L).model("a").user(user1).countUsed(1).build();
         var car2 = Car.builder().id(2L).model("b").user(user1).countUsed(2).build();

@@ -24,9 +24,9 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String fistName;
+    private String fistname;
 
-    private String lastName;
+    private String lastname;
 
     @Column(unique = true)
     private String email;
@@ -66,14 +66,6 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public String getFistName() {
-        return fistName;
-    }
-
-    public void setFistName(String fistName) {
-        this.fistName = fistName;
-    }
-
     public byte[] getPhoto() {
         return photo;
     }
@@ -82,12 +74,20 @@ public class User implements UserDetails {
         this.photo = photo;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getFistname() {
+        return fistname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setFistname(String fistname) {
+        this.fistname = fistname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getEmail() {
@@ -181,8 +181,8 @@ public class User implements UserDetails {
     public UserDTO parseToDTO() {
         return UserDTO.builder()
                  .id(this.getId())
-                .fistName(this.getFistName())
-                .lastName(this.getLastName())
+                .fistName(this.getFistname())
+                .lastName(this.getLastname())
                 .email(this.getEmail())
                 .login(this.getUsername())
                 .phone(this.getPhone())
