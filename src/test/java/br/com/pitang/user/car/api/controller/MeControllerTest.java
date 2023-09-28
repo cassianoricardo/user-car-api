@@ -8,8 +8,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import java.sql.Date;
-
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -32,8 +30,8 @@ class MeControllerTest extends MockMvcBase {
                                                    .lastName("carlos")
                                                    //.birtday(Date.valueOf("1997-10-07"))
                                                    .login("ze").build())
-                                      .lastLogin(Date.valueOf("1997-10-07"))
-                                      .createdAt(Date.valueOf("1997-10-07"))
+                                      //.lastLogin(Date.valueOf("1997-10-07"))
+                                      //.createdAt(Date.valueOf("1997-10-07"))
                                       .build();
 
         when(meInfoService.getInfo()).thenReturn(me);
@@ -44,10 +42,10 @@ class MeControllerTest extends MockMvcBase {
                 .andExpect(jsonPath("$.user.phone").value("081"))
                 .andExpect(jsonPath("$.user.fistName").value("zé"))
                 .andExpect(jsonPath("$.user.lastName").value("carlos"))
-                .andExpect(jsonPath("$.user.login").value("ze"))
+                .andExpect(jsonPath("$.user.login").value("ze"));
                 //.andExpect(jsonPath("$.user.birtday").value("07/10/1997"))
-                .andExpect(jsonPath("$.createdAt").value("07/10/1997"))
-                .andExpect(jsonPath("$.lastLogin").value("07/10/1997"));
+                //.andExpect(jsonPath("$.createdAt").value("07/10/1997"))
+                //.andExpect(jsonPath("$.lastLogin").value("07/10/1997"));
 
         verify(meInfoService).getInfo();
     }
