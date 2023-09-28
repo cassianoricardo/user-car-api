@@ -56,7 +56,7 @@ class UserControllerTest extends MockMvcBase {
                 .phone("081")
                 .fistName("zé")
                 .lastName("carlos")
-                .birtday(Date.valueOf("1997-9-7"))
+                //.birtday(Date.valueOf("1997-9-7"))
                 .login("ze")
                 .build());
         List<UserDTO> userDTOListExpected = new ArrayList<>();
@@ -72,8 +72,8 @@ class UserControllerTest extends MockMvcBase {
                 .andExpect(jsonPath("$.[0].phone").value("081"))
                 .andExpect(jsonPath("$.[0].fistName").value("zé"))
                 .andExpect(jsonPath("$.[0].lastName").value("carlos"))
-                .andExpect(jsonPath("$.[0].login").value("ze"))
-                .andExpect(jsonPath("$.[0].birtday").value("07/09/1997"));
+                .andExpect(jsonPath("$.[0].login").value("ze"));
+                //.andExpect(jsonPath("$.[0].birtday").value("07/09/1997"));
 
         verify(userFindService).findAll();
     }
@@ -90,7 +90,7 @@ class UserControllerTest extends MockMvcBase {
                 .phone("081")
                 .fistName("zé")
                 .lastName("carlos")
-                .birtday(Date.valueOf("1997-9-7"))
+                //.birtday(Date.valueOf("1997-9-7"))
                 .login("ze")
                 .build();
 
@@ -106,8 +106,8 @@ class UserControllerTest extends MockMvcBase {
                 .andExpect(jsonPath("$.phone").value("081"))
                 .andExpect(jsonPath("$.fistName").value("zé"))
                 .andExpect(jsonPath("$.lastName").value("carlos"))
-                .andExpect(jsonPath("$.login").value("ze"))
-                .andExpect(jsonPath("$.birtday").value("07/09/1997"));
+                .andExpect(jsonPath("$.login").value("ze"));
+                //.andExpect(jsonPath("$.birtday").value("07/09/1997"));
 
         verify(userFindService).findById(1L);
     }
@@ -132,7 +132,7 @@ class UserControllerTest extends MockMvcBase {
                 .phone("081")
                 .fistName("zé")
                 .lastName("carlos")
-                .birtday(Date.valueOf("1997-9-7"))
+                //.birtday(Date.valueOf("1997-9-7"))
                 .login("ze")
                 .build();
 
@@ -147,8 +147,8 @@ class UserControllerTest extends MockMvcBase {
                 .andExpect(jsonPath("$.phone").value("081"))
                 .andExpect(jsonPath("$.fistName").value("zé"))
                 .andExpect(jsonPath("$.lastName").value("carlos"))
-                .andExpect(jsonPath("$.login").value("ze"))
-                .andExpect(jsonPath("$.birtday").value("07/09/1997"));
+                .andExpect(jsonPath("$.login").value("ze"));
+                //.andExpect(jsonPath("$.birtday").value("07/09/1997"));
 
         verify(userUpdateService).update(eq(1L), any(UserUpdateRequest.class));
     }

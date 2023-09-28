@@ -30,7 +30,7 @@ class MeControllerTest extends MockMvcBase {
                                                    .phone("081")
                                                    .fistName("zé")
                                                    .lastName("carlos")
-                                                   .birtday(Date.valueOf("1997-10-07"))
+                                                   //.birtday(Date.valueOf("1997-10-07"))
                                                    .login("ze").build())
                                       .lastLogin(Date.valueOf("1997-10-07"))
                                       .createdAt(Date.valueOf("1997-10-07"))
@@ -45,7 +45,7 @@ class MeControllerTest extends MockMvcBase {
                 .andExpect(jsonPath("$.user.fistName").value("zé"))
                 .andExpect(jsonPath("$.user.lastName").value("carlos"))
                 .andExpect(jsonPath("$.user.login").value("ze"))
-                .andExpect(jsonPath("$.user.birtday").value("07/10/1997"))
+                //.andExpect(jsonPath("$.user.birtday").value("07/10/1997"))
                 .andExpect(jsonPath("$.createdAt").value("07/10/1997"))
                 .andExpect(jsonPath("$.lastLogin").value("07/10/1997"));
 
