@@ -3,7 +3,6 @@ package br.com.pitang.user.car.api.model.request.user;
 
 import br.com.pitang.user.car.api.model.dto.CarDTO;
 import br.com.pitang.user.car.api.model.entity.User;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -22,15 +21,15 @@ import static br.com.pitang.user.car.api.util.RegexConstants.EMAIL_PATTERN;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserCreateRequest {
-    @NotBlank(message = "Missing fistName")
-    private String fistName;
+    @NotBlank(message = "Missing firstName")
+    private String firstName;
     @NotBlank(message = "Missing lastName")
     private String lastName;
     @NotBlank(message = "Missing email")
     @Pattern(regexp = EMAIL_PATTERN, message = "Invalid email")
     private String email;
     @NotNull(message = "Missing birtday")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    /*@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")*/
     private Date birtday;
     @NotBlank(message = "Missing login")
     private String login;
@@ -43,7 +42,7 @@ public class UserCreateRequest {
     public User parseToEntity(){
 
         return User.builder()
-                .firstname(this.fistName)
+                .firstname(this.firstName)
                 .lastname(this.lastName)
                 .email(this.email)
                 .login(this.login)
