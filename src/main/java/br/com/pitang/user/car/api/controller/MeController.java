@@ -13,7 +13,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @SecurityRequirement(name = "Bearer Authentication")
-@RequestMapping(path = "me",  consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+@RequestMapping(path = "me", produces = APPLICATION_JSON_VALUE)
 public class MeController {
 
     @Autowired
