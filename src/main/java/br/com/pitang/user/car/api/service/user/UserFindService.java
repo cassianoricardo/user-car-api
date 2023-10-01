@@ -50,7 +50,7 @@ public class UserFindService {
             }
         });
 
-        map.values().forEach(listUsers -> listUsers.sort(Comparator.comparing(User::getFistname)
+        map.values().forEach(listUsers -> listUsers.sort(Comparator.comparing(User::getFirstname)
                                                                    .thenComparing(User::getLastname)));
         var orderUsers = map.entrySet().stream().sorted(Map.Entry.comparingByKey(Comparator.reverseOrder()))
                                                              .map(Map.Entry::getValue)

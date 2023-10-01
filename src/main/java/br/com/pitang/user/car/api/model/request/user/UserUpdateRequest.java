@@ -17,18 +17,17 @@ import static br.com.pitang.user.car.api.util.RegexConstants.EMAIL_PATTERN;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@AtLeastOneOf(fields = {"fistName", "lastName", "email", "birtday", "login", "password", "phone"},
+@AtLeastOneOf(fields = {"firstName", "lastName", "email", "birtday", "login", "password", "phone"},
 message = "Enter at least one of the fields fistName, lastName, email, birtday, login, password, phone")
 public class UserUpdateRequest {
 
 
-    private String fistName;
+    private String firstName;
     private String lastName;
 
     @Pattern(regexp = EMAIL_PATTERN, message = "Invalid email")
     private String email;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private Date birtday;
 
     private String login;

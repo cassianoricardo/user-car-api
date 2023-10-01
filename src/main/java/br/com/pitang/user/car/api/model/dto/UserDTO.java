@@ -18,10 +18,10 @@ import java.util.List;
 public class UserDTO {
 
     private Long id;
-    private String fistName;
+    private String firstName;
     private String lastName;
     private String email;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", timezone = "America/Sao_Paulo")
+    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", timezone = "America/Sao_Paulo")
     private Date birtday;
     private String login;
     @JsonIgnore
@@ -34,7 +34,7 @@ public class UserDTO {
 
     public User parseToEntity(){
         return User.builder().id(this.id)
-                .fistname(this.fistName)
+                .firstname(this.firstName)
                 .lastname(this.lastName)
                 .email(this.email)
                 .login(this.login)
