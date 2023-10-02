@@ -55,7 +55,7 @@ logging:
             sql: trace
 
 server:
-  port: 8080
+  port: 8081
   servlet:
     contextPath: "/api"
     session:
