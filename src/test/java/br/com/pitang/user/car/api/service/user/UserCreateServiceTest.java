@@ -53,7 +53,7 @@ class UserCreateServiceTest extends MockitoTestBase {
 
         var userCreateRequest = UserCreateRequest
                 .builder().login("ze").password("123").email("ze@gmail.com")
-                .birtday(Date.valueOf("1999-01-01")).fistName("ze")
+                .birtday(Date.valueOf("1999-01-01")).firstName("ze")
                 .lastName("carlos").phone("081")
                 .cars(carsDTO)
                 .build();
@@ -86,7 +86,7 @@ class UserCreateServiceTest extends MockitoTestBase {
 
         var userCreateRequest = UserCreateRequest
                 .builder().login("ze").password("123").email("ze@gmail.com")
-                .birtday(Date.valueOf("1999-01-01")).fistName("ze")
+                .birtday(Date.valueOf("1999-01-01")).firstName("ze")
                 .lastName("carlos").phone("081")
                 .cars(carsDTO)
                 .build();
@@ -120,7 +120,7 @@ class UserCreateServiceTest extends MockitoTestBase {
 
         var userCreateRequest = UserCreateRequest
                 .builder().login("ze").password("123").email("ze@gmail.com")
-                .birtday(Date.valueOf("1999-01-01")).fistName("ze")
+                .birtday(Date.valueOf("1999-01-01")).firstName("ze")
                 .lastName("carlos").phone("081")
                 .cars(carsDTO)
                 .build();
@@ -159,7 +159,7 @@ class UserCreateServiceTest extends MockitoTestBase {
 
         var userCreateRequest = UserCreateRequest
                 .builder().login("ze").password("123").email("ze@gmail.com")
-                .birtday(Date.valueOf("1999-01-01")).fistName("ze")
+                .birtday(Date.valueOf("1999-01-01")).firstName("ze")
                 .lastName("carlos").phone("081")
                 .cars(carsDTO)
                 .build();

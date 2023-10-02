@@ -26,7 +26,7 @@ class MeControllerTest extends MockMvcBase {
                                       .user(UserDTO.builder()
                                                    .id(1L).email("ze@gmail.com")
                                                    .phone("081")
-                                                   .fistName("zé")
+                                                   .firstName("zé")
                                                    .lastName("carlos")
                                                    //.birtday(Date.valueOf("1997-10-07"))
                                                    .login("ze").build())
@@ -40,7 +40,7 @@ class MeControllerTest extends MockMvcBase {
                 .andExpect(jsonPath("$.user.id").value(1))
                 .andExpect(jsonPath("$.user.email").value("ze@gmail.com"))
                 .andExpect(jsonPath("$.user.phone").value("081"))
-                .andExpect(jsonPath("$.user.fistName").value("zé"))
+                .andExpect(jsonPath("$.user.firstName").value("zé"))
                 .andExpect(jsonPath("$.user.lastName").value("carlos"))
                 .andExpect(jsonPath("$.user.login").value("ze"));
                 //.andExpect(jsonPath("$.user.birtday").value("07/10/1997"))

@@ -63,10 +63,10 @@ class UserFindServiceTest extends MockitoTestBase {
     @DisplayName("findAll :: should to return all users")
     void should_to_return_all_users() {
 
-        var user1 = User.builder().id(1L).fistname("user").lastname("a").build();
-        var user2 = User.builder().id(2L).fistname("user").lastname("b").build();
-        var user3 = User.builder().id(3L).fistname("user").lastname("c").build();
-        var user4 = User.builder().id(4L).fistname("user").lastname("d").build();
+        var user1 = User.builder().id(1L).firstname("user").lastname("a").build();
+        var user2 = User.builder().id(2L).firstname("user").lastname("b").build();
+        var user3 = User.builder().id(3L).firstname("user").lastname("c").build();
+        var user4 = User.builder().id(4L).firstname("user").lastname("d").build();
 
         var car1 = Car.builder().id(1L).model("a").user(user1).countUsed(1).build();
         var car2 = Car.builder().id(2L).model("b").user(user1).countUsed(2).build();
@@ -74,10 +74,10 @@ class UserFindServiceTest extends MockitoTestBase {
         var car4 = Car.builder().id(4L).model("d").user(user2).countUsed(1).build();
 
         var usersDTOExpected = List.of(
-                UserDTO.builder().id(2L).fistName("user").lastName("b").cars(List.of(CarDTO.builder().id(3L).model("c").build(), CarDTO.builder().id(4L).model("d").build())).build(),
-                UserDTO.builder().id(1L).fistName("user").lastName("a").cars(List.of(CarDTO.builder().id(2L).model("b").build(), CarDTO.builder().id(1L).model("a").build())).build(),
-                UserDTO.builder().id(3L).fistName("user").lastName("c").cars(List.of()).build(),
-                UserDTO.builder().id(4L).fistName("user").lastName("d").cars(List.of()).build());
+                UserDTO.builder().id(2L).firstName("user").lastName("b").cars(List.of(CarDTO.builder().id(3L).model("c").build(), CarDTO.builder().id(4L).model("d").build())).build(),
+                UserDTO.builder().id(1L).firstName("user").lastName("a").cars(List.of(CarDTO.builder().id(2L).model("b").build(), CarDTO.builder().id(1L).model("a").build())).build(),
+                UserDTO.builder().id(3L).firstName("user").lastName("c").cars(List.of()).build(),
+                UserDTO.builder().id(4L).firstName("user").lastName("d").cars(List.of()).build());
 
         when(userRepository.findAll()).thenReturn(List.of(user1, user2, user3, user4));
         when(carRepository.findAll()).thenReturn(List.of(car1, car2, car3, car4));

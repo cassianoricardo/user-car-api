@@ -54,7 +54,7 @@ class UserControllerTest extends MockMvcBase {
         var userDTOList = List.of(UserDTO.builder().id(1L)
                 .email("ze@gmail.com")
                 .phone("081")
-                .fistName("zé")
+                .firstName("zé")
                 .lastName("carlos")
                 //.birtday(Date.valueOf("1997-9-7"))
                 .login("ze")
@@ -70,7 +70,7 @@ class UserControllerTest extends MockMvcBase {
                 .andExpect(jsonPath("$.[0].id").value(1))
                 .andExpect(jsonPath("$.[0].email").value("ze@gmail.com"))
                 .andExpect(jsonPath("$.[0].phone").value("081"))
-                .andExpect(jsonPath("$.[0].fistName").value("zé"))
+                .andExpect(jsonPath("$.[0].firstName").value("zé"))
                 .andExpect(jsonPath("$.[0].lastName").value("carlos"))
                 .andExpect(jsonPath("$.[0].login").value("ze"));
                 //.andExpect(jsonPath("$.[0].birtday").value("07/09/1997"));
@@ -88,7 +88,7 @@ class UserControllerTest extends MockMvcBase {
         var userDTO = UserDTO.builder().id(1L)
                 .email("ze@gmail.com")
                 .phone("081")
-                .fistName("zé")
+                .firstName("zé")
                 .lastName("carlos")
                 //.birtday(Date.valueOf("1997-9-7"))
                 .login("ze")
@@ -104,7 +104,7 @@ class UserControllerTest extends MockMvcBase {
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.email").value("ze@gmail.com"))
                 .andExpect(jsonPath("$.phone").value("081"))
-                .andExpect(jsonPath("$.fistName").value("zé"))
+                .andExpect(jsonPath("$.firstName").value("zé"))
                 .andExpect(jsonPath("$.lastName").value("carlos"))
                 .andExpect(jsonPath("$.login").value("ze"));
                 //.andExpect(jsonPath("$.birtday").value("07/09/1997"));
@@ -130,7 +130,7 @@ class UserControllerTest extends MockMvcBase {
         var userUpdateRequest = UserUpdateRequest.builder()
                 .email("ze@gmail.com")
                 .phone("081")
-                .fistName("zé")
+                .firstName("zé")
                 .lastName("carlos")
                 //.birtday(Date.valueOf("1997-9-7"))
                 .login("ze")
@@ -145,7 +145,7 @@ class UserControllerTest extends MockMvcBase {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.email").value("ze@gmail.com"))
                 .andExpect(jsonPath("$.phone").value("081"))
-                .andExpect(jsonPath("$.fistName").value("zé"))
+                .andExpect(jsonPath("$.firstName").value("zé"))
                 .andExpect(jsonPath("$.lastName").value("carlos"))
                 .andExpect(jsonPath("$.login").value("ze"));
                 //.andExpect(jsonPath("$.birtday").value("07/09/1997"));
@@ -177,7 +177,7 @@ class UserControllerTest extends MockMvcBase {
         var userCreateRequest = UserCreateRequest.builder()
                 .email("ze@gmail.com")
                 .phone("081")
-                .fistName("zé")
+                .firstName("zé")
                 .lastName("carlos")
                 .birtday(Date.valueOf("1997-9-7"))
                 .login("ze")
@@ -211,7 +211,7 @@ class UserControllerTest extends MockMvcBase {
                 .email("ze@gmailcom")
                 .birtday(Date.valueOf("1997-9-7"))
                 .phone("081")
-                .fistName("zé")
+                .firstName("zé")
                 .lastName("carlos")
                 .login("ze")
                 .password("123")
@@ -229,7 +229,7 @@ class UserControllerTest extends MockMvcBase {
         var missingBirtday = UserCreateRequest.builder()
                 .email("ze@gmail.com")
                 .phone("081")
-                .fistName("zé")
+                .firstName("zé")
                 .lastName("carlos")
                 .login("ze")
                 .password("123")
@@ -238,7 +238,7 @@ class UserControllerTest extends MockMvcBase {
         var missingEmail = UserCreateRequest.builder()
                 .birtday(Date.valueOf("1997-9-7"))
                 .phone("081")
-                .fistName("zé")
+                .firstName("zé")
                 .lastName("carlos")
                 .login("ze")
                 .password("123")
@@ -247,7 +247,7 @@ class UserControllerTest extends MockMvcBase {
         var missingPhone = UserCreateRequest.builder()
                 .email("ze@gmail.com")
                 .birtday(Date.valueOf("1997-9-7"))
-                .fistName("zé")
+                .firstName("zé")
                 .lastName("carlos")
                 .login("ze")
                 .password("123")
@@ -266,7 +266,7 @@ class UserControllerTest extends MockMvcBase {
                 .email("ze@gmail.com")
                 .birtday(Date.valueOf("1997-9-7"))
                 .phone("081")
-                .fistName("zé")
+                .firstName("zé")
                 .login("ze")
                 .password("123")
                 .build();
@@ -275,7 +275,7 @@ class UserControllerTest extends MockMvcBase {
                 .email("ze@gmail.com")
                 .birtday(Date.valueOf("1997-9-7"))
                 .phone("081")
-                .fistName("zé")
+                .firstName("zé")
                 .lastName("carlos")
                 .password("123")
                 .build();
@@ -284,7 +284,7 @@ class UserControllerTest extends MockMvcBase {
                 .email("ze@gmail.com")
                 .birtday(Date.valueOf("1997-9-7"))
                 .phone("081")
-                .fistName("zé")
+                .firstName("zé")
                 .lastName("carlos")
                 .login("ze")
                 .build();
@@ -292,7 +292,7 @@ class UserControllerTest extends MockMvcBase {
         return Stream.of(Arguments.of(missingBirtday, "Missing birtday"),
                 Arguments.of(missingEmail, "Missing email"),
                 Arguments.of(missingPhone, "Missing phone"),
-                Arguments.of(missingFistName, "Missing fistName"),
+                Arguments.of(missingFistName, "Missing firstName"),
                 Arguments.of(missingLastName, "Missing lastName"),
                 Arguments.of(missinglogin, "Missing login"),
                 Arguments.of(missingPassword, "Missing password"));
