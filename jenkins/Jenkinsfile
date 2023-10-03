@@ -4,7 +4,6 @@ pipeline {
     tools {
         maven 'Maven 3.9.4'
         jdk 'jdk11'
-        git 'agent-git'
     }
     stages {
         stage ('Initialize') {
