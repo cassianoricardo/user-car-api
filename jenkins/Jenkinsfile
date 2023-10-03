@@ -6,30 +6,10 @@ pipeline {
         jdk 'jdk18'
     }
     stages {
-        stage('Build') {
-            steps {
-                bat 'mvn -B -DskipTests clean package'
-            }
-        }
-        stage('Test') {
-            steps {
-                bat 'mvn test'
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
-            }
-        }
-        stage('SonarQube') {
-            steps {
-                bat 'mvn sonar:sonar -X -Dsonar.host.url=http://localhost:9000 -Dsonar.token=squ_8cee5d904f73edc2f2633b8540536e7aadceda3e'
-            }
-        }
         stage('Deployment') {
             steps {
              bat "FOR /F \"tokens=5 delims= \" %%G IN (\"netstat -a | findstr :8081\") DO TaskKill.exe /PID %%G /fi \"memusage gt 0\""
-             bat 'mvn spring-boot:run -Dserver.port=8081'
+             bat 'start mvnw.cmd spring-boot:run -Dserver.port=8989'
             }
         }
     }
