@@ -21,5 +21,10 @@ pipeline {
                 }
             }
         }
+        stage('SonarQube') {
+            steps {
+                bat 'mvn sonar:sonar -X -Dsonar.host.url=http://localhost:9000 -Dsonar.token=squ_8cee5d904f73edc2f2633b8540536e7aadceda3e'
+            }
+        }
     }
 }
