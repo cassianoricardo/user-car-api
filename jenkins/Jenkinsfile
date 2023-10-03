@@ -26,5 +26,10 @@ pipeline {
                 bat 'mvn sonar:sonar -X -Dsonar.host.url=http://localhost:9000 -Dsonar.token=squ_8cee5d904f73edc2f2633b8540536e7aadceda3e'
             }
         }
+        stage('Deployment') {
+            steps {
+                bat 'mvn spring-boot:run -Dserver.port=8081'
+            }
+        }
     }
 }
