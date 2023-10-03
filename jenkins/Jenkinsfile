@@ -1,13 +1,10 @@
 #!/usr/bin/env groovy
 pipeline {
-    agent none
+    agent any
     stages {
-        stage ('build') {
-            agent {
-                docker { image 'maven' }
-            }
+        stage('Build') {
             steps {
-                sh "mvn package -Dmaven.test.skip=true"
+               echo 'This is a minimal pipeline.'
             }
         }
     }
