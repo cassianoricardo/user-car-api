@@ -6,9 +6,29 @@ pipeline {
         jdk 'OpenJDK'
     }
     stages {
+        stage('Build') {
+            steps {
+                sh 'mvn -B -DskipTests clean package'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
+        }
+        stage('SonarQube') {
+            steps {
+                sh 'mvn sonar:sonar -X -Dsonar.host.url=http://44.219.250.237:9000 -Dsonar.token=squ_b240643bfc21dc2398b35183bcccdf5ec7a89950'
+            }
+        }
         stage("Deployment") {
             steps {
-                   sh 'sudo ufw allow 22'
+                   sh 'nohup ./mvnw spring-boot:run -Dserver.port=8081 &'
             }
         }
     }
