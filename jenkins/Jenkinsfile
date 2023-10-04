@@ -28,7 +28,7 @@ pipeline {
         }
         stage("Deployment") {
             steps {
-                   sh 'nohup start.sh'
+                   sh 'chmod 755 start.sh || nohup start.sh'
             }
         }
     }
