@@ -29,7 +29,7 @@ pipeline {
         stage('Deployment') {
             steps {
              sh 'fuser -k 8081/tcp || true'
-             sh "mvn spring-boot:run -Dserver.port=8081"
+             sh 'mvn spring-boot:run -Dserver.port=8081'
             }
         }
     }
