@@ -26,10 +26,11 @@ pipeline {
                 sh 'mvn sonar:sonar -X -Dsonar.host.url=http://54.89.70.149:9000 -Dsonar.token=squ_d6791927be45666ee374a2ccef7f33134b1ccf4f'
             }
         }
-        stage('Deployment') {
-            steps {
-             sh 'fuser -k 8081/tcp || true'
-             sh 'mvn spring-boot:run -Dserver.port=8081'
+        stage("Deployment") {
+            sh "pid=\$(lsof -i:8989 -t); kill -TERM \$pid "
+              + "|| kill -KILL \$pid"
+            withEnv(['JENKINS_NODE_COOKIE=dontkill']) {
+                sh 'nohup ./mvnw spring-boot:run -Dserver.port=8989 &'
             }
         }
     }
