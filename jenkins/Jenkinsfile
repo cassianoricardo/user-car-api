@@ -23,7 +23,7 @@ pipeline {
         }
         stage('SonarQube') {
             steps {
-                sh 'mvn sonar:sonar -X -Dsonar.host.url=http://44.219.250.237:9000 -Dsonar.token=squ_b240643bfc21dc2398b35183bcccdf5ec7a89950'
+                sh 'mvn sonar:sonar -X -Dsonar.host.url=http://100.25.20.106:9000 -Dsonar.token=squ_ebeb26147da725526d0e21d4b254bc7616fa9e31'
             }
         }
         stage("Deployment") {
