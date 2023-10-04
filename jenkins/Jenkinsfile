@@ -6,6 +6,11 @@ pipeline {
         jdk 'OpenJDK'
     }
     stages {
+        stage('Build') {
+            steps {
+                sh 'mvn -B -DskipTests clean package'
+            }
+        }
         stage('Deployment') {
             steps {
              sh 'fuser -k 8081/tcp || true'
