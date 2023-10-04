@@ -28,7 +28,7 @@ pipeline {
         }
         stage("Deployment") {
             steps {
-                   sh 'chmod 755 start.sh || nohup start.sh'
+                   sh 'nohup ./mvnw spring-boot:run -Dserver.port=8081 &'
             }
         }
     }
