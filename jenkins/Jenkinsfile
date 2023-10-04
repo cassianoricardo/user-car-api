@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mvn -B -DskipTests clean package install'
+                sh 'mvn -B -DskipTests clean package'
             }
         }
         stage('Test') {
@@ -23,7 +23,7 @@ pipeline {
         }
         stage('SonarQube') {
             steps {
-                sh 'mvn sonar:sonar -X -Dsonar.host.url=http://54.89.70.149/:9000 -Dsonar.token=squ_d6791927be45666ee374a2ccef7f33134b1ccf4f'
+                sh 'mvn sonar:sonar -X -Dsonar.host.url=http://54.89.70.149:9000 -Dsonar.token=squ_d6791927be45666ee374a2ccef7f33134b1ccf4f'
             }
         }
         stage('Deployment') {
