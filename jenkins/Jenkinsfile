@@ -13,7 +13,7 @@ pipeline {
         }
         stage("Deployment") {
             steps {
-                   sh 'mvn spring-boot:run -Dmaven.tomcat.port=8081 & || true'
+                   sh 'mvn spring-boot:run -Dmaven.tomcat.port=8081 &'
             }
         }
     }
