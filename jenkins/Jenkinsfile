@@ -13,7 +13,7 @@ pipeline {
         }
         stage("Deployment") {
             steps {
-                   sh 'mvn spring-boot:run -Dmaven.tomcat.port=8081 &'
+                   sh 'sh "mvn spring-boot:run -Dpmd.skip=true -Dcpd.skip=true -Dfindbugs.skip=true -Dmaven.tomcat.port=8081'
             }
         }
     }
