@@ -36,4 +36,6 @@ public class UserUpdateRequest {
 
     private String phone;
 
+    private byte[] photo;
+
 }

@@ -46,6 +46,9 @@ public class UserUpdateService {
         if (Objects.nonNull(userUpdateRequest.getPhone()) && !userUpdateRequest.getPhone().equals(user.getPhone())){
             user.setPhone(userUpdateRequest.getPhone());
         }
+        if (Objects.nonNull(userUpdateRequest.getPhoto()) && !userUpdateRequest.getPhoto().equals(user.getPhoto())){
+            user.setPhoto(userUpdateRequest.getPhoto());
+        }
         if (Objects.nonNull(userUpdateRequest.getPassword()) && !userUpdateRequest.getPassword().equals(user.getPassword())){
             user.setPassword(userUpdateRequest.getPassword());
         }

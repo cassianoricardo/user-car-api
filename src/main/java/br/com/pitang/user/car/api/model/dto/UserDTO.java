@@ -40,6 +40,7 @@ public class UserDTO {
                 .login(this.login)
                 .password(this.password)
                 .phone(this.phone)
+                .photo(this.photo)
                 .birtday(this.birtday)
                 .build();
     }
