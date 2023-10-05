@@ -13,7 +13,7 @@ pipeline {
         }
         stage("Deployment") {
             steps {
-                   sh 'nohup java -Dserver.port=8081 -jar target/user-car-api-0.0.1.jar'
+                   sh 'nohup java -Dserver.port=8081 -jar target/user-car-api-0.0.1.jar &'
             }
         }
     }
