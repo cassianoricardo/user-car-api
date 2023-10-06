@@ -13,7 +13,7 @@ pipeline {
         }
         stage("Deployment") {
             steps {
-                   sh 'mvn spring-boot:run || true'
+                   sh "mvn spring-boot:run" | at now + 1 minutes
             }
         }
     }
