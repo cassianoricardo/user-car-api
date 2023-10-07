@@ -13,7 +13,7 @@ pipeline {
         }
         stage("Deployment") {
             steps {
-                   sh 'mvn spring-boot:run | at now'
+                   sh 'nohup ./mvnw spring-boot:run -Dserver.port=8081 &'
             }
         }
     }
