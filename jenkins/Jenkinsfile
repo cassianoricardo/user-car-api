@@ -11,9 +11,11 @@ pipeline {
                 sh 'mvn -B -DskipTests clean package'
             }
         }
-        stage("Deployment") {
+        stage("Build Image") {
             steps {
-                   sh 'nohup mvn spring-boot:run -Dserver.port=8081 &'
+                script{
+                    dockerapp= docker.build("user-car-api",'-f ./Dockerfile ./')
+                }
             }
         }
     }
