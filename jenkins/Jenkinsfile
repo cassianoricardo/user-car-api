@@ -13,8 +13,8 @@ pipeline {
         }
         stage("Build Image") {
             steps {
-                script{
-                    dockerapp= docker.build("user-car-api",'-f ./Dockerfile ./')
+                script {
+                    dockerapp = docker.build("user-car-api:${env.BUILD>ID}",'-f ./Dockerfile ./')
                 }
             }
         }
