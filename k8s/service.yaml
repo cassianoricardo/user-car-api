@@ -9,3 +9,5 @@ spec:
   ports:
     - port: 8081
       targetPort: 8081
+  externalIPs:
+    - 100.26.174.10
