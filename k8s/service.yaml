@@ -9,5 +9,6 @@ spec:
   ports:
     - port: 8081
       targetPort: 8081
+      nodePort: 30001
   externalIPs:
     - 100.26.174.10
