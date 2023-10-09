@@ -30,7 +30,7 @@ pipeline {
         }
         stage('SonarQube') {
             steps {
-                sh 'mvn sonar:sonar -X -Dsonar.host.url=http://100.25.20.106:9000 -Dsonar.token=squ_ebeb26147da725526d0e21d4b254bc7616fa9e31'
+                sh 'mvn sonar:sonar -X -Dsonar.host.url=http://http://100.26.174.10:9000 -Dsonar.token=squ_ebeb26147da725526d0e21d4b254bc7616fa9e31'
             }
         }
         stage ('Push Image') {
