@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-car-api-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: user-car-api
+  template:
+    metadata:
+      labels:
+        app: user-car-api
+    spec:
+      containers:
+      - name: user-car-api
+        image: cassianoricardo/user-car-api:latest
+        ports:
+        - containerPort: 8081
