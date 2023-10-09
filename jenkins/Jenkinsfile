@@ -26,10 +26,22 @@ pipeline {
                 sh 'mvn sonar:sonar -X -Dsonar.host.url=http://44.219.250.237:9000 -Dsonar.token=squ_b240643bfc21dc2398b35183bcccdf5ec7a89950'
             }
         }
-        stage("Deployment") {
+        stage("Create Image") {
             steps {
-                   sh 'echo Deployment'
+                script {
+                    dockerapp = docker.build("cassianoricardo/user-car-api:${env.BUILD_ID}")
+                }
             }
         }
+       stage ('Push Image') {
+           steps {
+               script {
+                   docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                       dockerapp.push('latest')
+                       dockerapp.push("${env.BUILD_ID}")
+                   }
+               }
+           }
+       }
     }
 }
